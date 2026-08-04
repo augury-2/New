@@ -5,3 +5,7 @@ preview/*.png
 # Python caches
 __pycache__/
 *.pyc
+
+# Media build intermediates (regenerable via dancevid.py / audiogen.py)
+_frames/
+*.wav

@@ -26,6 +26,7 @@ from design import C
 import content as K
 import icons
 import mapgen
+import media
 import scenes
 from anim import Timeline, set_transition
 from pptx_helpers import (IN, blank_slide, bring_to_front, dot, hairline,
@@ -273,6 +274,10 @@ def s_cover():
                      color=C.SNOW_DIM, align="c", track=280, caps=True)],
                name="herotag")
 
+    # ambient score — autoplays and loops as the living soundtrack
+    aud = media.add_audio(slide, os.path.join(ASSETS, "score.m4a"),
+                          x=W - 0.56, y=H - 0.56, size=0.40)
+
     tl.zoom_in(dev, delay=300, dur=1600)
     for s in eb:
         tl.fade_in(s, delay=700, dur=1200)
@@ -280,6 +285,7 @@ def s_cover():
     tl.rise_in(sub, delay=1750, dur=1500)
     tl.wipe_in(r, delay=2250, dur=900)
     tl.fade_in(tag, delay=2500, dur=1300)
+    tl.play_media(aud, loop=True, vol=55000, kind="audio")
     tl.apply()
     notes(slide, K.NOTES["cover"])
 
@@ -879,6 +885,40 @@ def s_dance():
     notes(slide, K.NOTES["dance"])
 
 
+# ---- 16 dance film (living background video) --------------------------------
+def s_dance_film():
+    """A full-bleed cinematic interlude: an original animated dance loop that
+    plays and loops on its own behind a minimal caption."""
+    slide, tl = new_slide(transition="smooth", dur=D.D_TRANSITION_SLOW, bg=C.INK)
+    vid = media.add_video(slide, os.path.join(ASSETS, "dance.mp4"),
+                          os.path.join(ASSETS, "dance_poster.jpg"),
+                          -0.06, -0.05, W + 0.12, H + 0.10)
+    # readability scrim over the moving footage
+    picture(slide, os.path.join(ASSETS, "scrim_bottom.png"), 0, 0, W, H,
+            name="scrim")
+    eb = eyebrow(slide, MX, 0.72, "The Dance  ·  The Fair Remembering Itself",
+                 color=C.GOLD_LIGHT)
+    ln = text(slide, MX, H - 2.72, W - 2 * MX, 1.7,
+              [para("When the dhol strikes, the circle forms itself \u2014",
+                    font=FE, size=34, color=C.SNOW, italic=True, line=1.14,
+                    shadow=dict(blur=22, dist=4, alpha=60)),
+               para("no stage, no front row. Everyone is in it.",
+                    font=FE, size=34, color=C.GOLD_LIGHT, italic=True, line=1.14,
+                    shadow=dict(blur=22, dist=4, alpha=60))], name="filmline")
+    cap = text(slide, MX, H - 0.94, W - 2 * MX, 0.4,
+               [para("Chholiya  ·  Jhora  ·  Chhapeli  ·  Jhumeila  ·  Thadya",
+                     font=FU, size=12.5, color=C.SNOW_DIM, caps=True, track=220)],
+               name="filmcap")
+    tl.play_media(vid, loop=True, kind="video")
+    for s in eb:
+        tl.fade_in(s, delay=400, dur=1400)
+    tl.rise_in(ln, delay=900, dur=1700, rise=0.03)
+    tl.fade_in(cap, delay=1900, dur=1400)
+    footer(slide, _idx(), "The Dance, Alive")
+    tl.apply()
+    notes(slide, K.NOTES.get("dance_film", K.NOTES["dance"]))
+
+
 # ---- 17 attire --------------------------------------------------------------
 def s_attire():
     slide, tl = new_slide(bg="14130F")
@@ -1399,6 +1439,7 @@ def build(force_art: bool = False):
             particles="fireflies", note_key="ch4", rays="rays_cool")
     s_music()
     s_dance()
+    s_dance_film()
     chapter("V", "THE HANDS", "Cloth, copper, bamboo and rice paste",
             "parchment", particles="dust", note_key="ch5", rays="rays_left")
     s_attire()

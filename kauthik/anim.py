@@ -109,6 +109,7 @@ class Timeline:
     def __init__(self, slide):
         self.slide = slide
         self._fx: list[str] = []
+        self._media: list[str] = []
         self._n = 0
 
     # ---------------------------------------------------------------- utils --
@@ -317,6 +318,29 @@ class Timeline:
                 self.disappear(sh, delay + (i + 1) * step)
         return self
 
+    # --------------------------------------------------------- media playback --
+    def play_media(self, shape, loop: bool = True, vol: int = 80000,
+                   kind: str = "video") -> "Timeline":
+        """
+        Auto-play an embedded video/audio the moment the slide appears, and
+        (optionally) loop it forever.
+
+        This writes the `<p:video>` / `<p:audio>` media node that PowerPoint
+        uses for click-to-play, but flips the start condition to `delay="0"`
+        (auto) and adds `repeatCount="indefinite"` (loop) — the minimal, safe
+        change to a structure PowerPoint is known to accept.
+        """
+        tag = "p:video" if kind == "video" else "p:audio"
+        rc = ' repeatCount="indefinite"' if loop else ""
+        self._media.append(
+            '<%s><p:cMediaNode vol="%d">'
+            '<p:cTn id="%d" fill="hold"%s display="0">'
+            '<p:stCondLst><p:cond delay="0"/></p:stCondLst>'
+            '</p:cTn>%s</p:cMediaNode></%s>'
+            % (tag, vol, self._id(), rc, self._tgt(shape), tag)
+        )
+        return self
+
     # ------------------------------------------------------ sequence helpers --
     def stagger(self, shapes, start: int = 0, gap: int = 260,
                 mode: str = "rise", **kw) -> "Timeline":
@@ -334,9 +358,15 @@ class Timeline:
         sld = self.slide._element
         for old in sld.findall(_q("p:timing")):
             sld.remove(old)
-        if not self._fx:
+        if not self._fx and not self._media:
             return
 
+        # A media-only slide still needs a valid (empty) main sequence.
+        inner = "".join(self._fx) if self._fx else (
+            '<p:par><p:cTn id="%d" fill="hold">'
+            '<p:stCondLst><p:cond delay="0"/></p:stCondLst>'
+            '<p:childTnLst/></p:cTn></p:par>' % self._id()
+        )
         xml = (
             '<p:timing %(ns)s><p:tnLst><p:par>'
             '<p:cTn id="1" dur="indefinite" restart="never" nodeType="tmRoot">'
@@ -354,8 +384,8 @@ class Timeline:
             '<p:tgtEl><p:sldTgt/></p:tgtEl></p:cond></p:prevCondLst>'
             '<p:nextCondLst><p:cond evt="onNext" delay="0">'
             '<p:tgtEl><p:sldTgt/></p:tgtEl></p:cond></p:nextCondLst>'
-            '</p:seq></p:childTnLst></p:cTn></p:par></p:tnLst></p:timing>'
-            % dict(ns=_XMLNS, fx="".join(self._fx))
+            '</p:seq>%(media)s</p:childTnLst></p:cTn></p:par></p:tnLst></p:timing>'
+            % dict(ns=_XMLNS, fx=inner, media="".join(self._media))
         )
         node = _parse(xml)
         # <p:timing> must follow cSld / clrMapOvr / transition

@@ -498,6 +498,15 @@ The distinction to leave with the audience: a stage has an audience; a circle
 does not. What is at risk is the circle.
 """,
 
+"dance_film": """
+DANCE — LIVING INTERLUDE. Let this one breathe. The background animation loops
+on its own: a linked Jhora line flanked by two Chholiya sword dancers, silhouetted
+against a Himalayan dusk with embers rising. No need to narrate over it — pause,
+let the movement and the score carry the moment, then read the line: when the
+dhol strikes, the circle forms itself. Everyone is in it. (If the venue laptop
+mutes media, the visuals still tell the story.)
+""",
+
 "ch5": "CHAPTER V — THE HANDS.",
 
 "attire": """
