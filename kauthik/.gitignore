@@ -1,0 +1,7 @@
+# QA render artifacts (regenerable via LibreOffice + build.py)
+preview/render/
+preview/*.png
+
+# Python caches
+__pycache__/
+*.pyc
