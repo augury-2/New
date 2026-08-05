@@ -2,8 +2,8 @@
 GARH KAUTHIG — Real-photo dance montage
 =======================================
 Builds a cinematic Ken-Burns montage (montage.mp4) from the club's own event
-photographs, crossfaded and set to the original dhol-damau score. Embedded as
-a looping background on the showcase slide.
+photographs, crossfaded and set to the Garhwali dhol-damau dance track
+(assets/score.m4a). Embedded as a looping background on the showcase slide.
 
 Run:  python3 dancevid.py
 Requires ffmpeg (found at /projects/ffmpeg/bin or on PATH).
@@ -81,14 +81,17 @@ def build():
         parts.append("[%s][%d]xfade=transition=%s:duration=%.3f:offset=%.3f[%s]"
                      % (prev, i, tr, XF, offset, label))
         prev = label
-    fc = ";".join(parts)
+    # gentle audio fade in at the top and out at the loop point
+    afc = ("[%d:a]afade=t=in:st=0:d=0.6,afade=t=out:st=%.3f:d=1.0[a]"
+           % (n, max(0.0, total - 1.0)))
+    fc = ";".join(parts + [afc])
 
     out = os.path.join(ASSETS, "montage.mp4")
     cmd = [FFMPEG, "-y"]
     for c in clips:
         cmd += ["-i", c]
     cmd += ["-stream_loop", "-1", "-i", os.path.join(ASSETS, "score.m4a")]
-    cmd += ["-filter_complex", fc, "-map", "[v]", "-map", "%d:a" % n,
+    cmd += ["-filter_complex", fc, "-map", "[v]", "-map", "[a]",
             "-t", "%.3f" % total, "-c:v", "libx264", "-preset", "medium",
             "-crf", "20", "-pix_fmt", "yuv420p", "-r", str(FPS),
             "-c:a", "aac", "-b:a", "160k", "-shortest",
