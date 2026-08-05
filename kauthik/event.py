@@ -12,6 +12,7 @@ photos/README.md).  Run:
 """
 from __future__ import annotations
 import math, os, random
+from PIL import Image
 from pptx import Presentation
 from pptx.enum.text import MSO_ANCHOR
 from pptx.enum.shapes import MSO_SHAPE
@@ -213,12 +214,45 @@ def photo_frame(slide, x, y, w, h, label="YOUR PHOTO", accent=V.MARIGOLD,
     return card
 
 
-def real_or_frame(slide, x, y, w, h, filename, **kw):
+CROPDIR = os.path.join(PHOTOS, ".crop")
+
+
+def _cover_crop(src, w, h):
+    """Center-crop `src` to the w:h box aspect (no distortion) and cache it."""
+    os.makedirs(CROPDIR, exist_ok=True)
+    target = float(w) / float(h)
+    base = os.path.splitext(os.path.basename(src))[0]
+    out = os.path.join(CROPDIR, f"{base}_{target:.4f}.jpg")
+    if os.path.exists(out) and os.path.getmtime(out) >= os.path.getmtime(src):
+        return out
+    im = Image.open(src).convert("RGB")
+    iw, ih = im.size
+    ar = iw / ih
+    if ar > target:                      # too wide -> trim the sides
+        nw = int(round(ih * target))
+        x0 = (iw - nw) // 2
+        im = im.crop((x0, 0, x0 + nw, ih))
+    elif ar < target:                    # too tall -> trim top/bottom
+        nh = int(round(iw / target))
+        y0 = (ih - nh) // 2
+        im = im.crop((0, y0, iw, y0 + nh))
+    im.save(out, "JPEG", quality=90)
+    return out
+
+
+def real_or_frame(slide, x, y, w, h, filename, crop=True, border=True,
+                  radius=0.04, **kw):
     for ext in ("", ".jpg", ".jpeg", ".png"):
         p = os.path.join(PHOTOS, filename if ext == "" else
                          os.path.splitext(filename)[0] + ext)
         if os.path.exists(p):
-            return picture(slide, p, x, y, w, h)
+            src = _cover_crop(p, w, h) if crop else p
+            pic = picture(slide, src, x, y, w, h)
+            if border:
+                acc = kw.get("accent", V.GOLD)
+                rect(slide, x, y, w, h, fill=None, line=acc, line_w=2.2,
+                     shape=RR, radius=radius, name="photo_edge")
+            return pic
     return photo_frame(slide, x, y, w, h, **kw)
 
 
@@ -387,20 +421,25 @@ def s_where():
          "Youth platforms celebrating folk arts today."),
     ]
     cw = (W - 2 * MX - 4 * 0.3) / 5
+    ch = 3.05
+    # centre the card row within the cream band below the header
+    top = 2.3 + ((H - 0.5) - 2.3 - ch) / 2
     cards = []
     for i, (ic, hd, bd) in enumerate(items):
         x = MX + i * (cw + 0.3)
         acc = ACCENTS[i % len(ACCENTS)]
-        fr = real_or_frame(slide, x, 2.5, cw, 1.8, f"where{i+1}",
-                           label="PHOTO", accent=acc, icon=ic, tint=V.GREEN)
-        icon_chip(slide, x + cw / 2, 4.62, 0.64, ic, acc)
-        hh = text(slide, x - 0.1, 5.02, cw + 0.2, 0.4,
-                  [para(hd, font=FU, size=11, color=V.GREEN_DEEP, bold=True,
-                        caps=True, track=40, align="c")], name="wh")
-        bb = text(slide, x - 0.1, 5.42, cw + 0.2, 1.3,
+        card = rect(slide, x, top, cw, ch, fill=V.WHITE, alpha=1.0, line=acc,
+                    line_w=1.6, shape=RR, radius=0.06, name="wcard")
+        rect(slide, x, top, cw, 0.12, fill=acc, alpha=1.0, shape=RR,
+             radius=0.5, name="wbar")
+        icon_chip(slide, x + cw / 2, top + 0.66, 0.78, ic, acc)
+        hh = text(slide, x + 0.05, top + 1.22, cw - 0.1, 0.6,
+                  [para(hd, font=FU, size=11.5, color=V.GREEN_DEEP, bold=True,
+                        caps=True, track=20, align="c", line=1.05)], name="wh")
+        bb = text(slide, x + 0.14, top + 1.86, cw - 0.28, ch - 2.0,
                   [para(bd, font=FB, size=10.5, color=V.SLATE, align="c",
-                        line=1.24)], name="wb")
-        cards += [fr, hh, bb]
+                        line=1.26)], name="wb")
+        cards += [card, hh, bb]
     for s in eb:
         tl.fade_in(s, delay=200)
     tl.fade_in(ttl, delay=450)
@@ -463,6 +502,48 @@ def s_happens():
 
 
 # ---- culture section --------------------------------------------------------
+def s_showcase():
+    """Full-bleed, looping real-photo dance montage with the dhol-damau score."""
+    slide, tl = new_slide(bg=V.INK, transition="fade")
+    vid = os.path.join(ASSETS, "montage.mp4")
+    poster = os.path.join(ASSETS, "montage_poster.jpg")
+    movie = None
+    if os.path.exists(vid):
+        movie = media.add_video(slide, vid, poster, 0, 0, W, H)
+    else:
+        # graceful fallback if the video has not been rendered yet
+        real_or_frame(slide, 0, 0, W, H, "cover2", crop=True, border=False,
+                      accent=V.MARIGOLD, icon="dancer")
+
+    # legibility scrim across the lower third
+    rect(slide, -0.1, H - 3.1, W + 0.2, 0.9, fill=V.INK, alpha=0.30,
+         name="scrim_soft")
+    rect(slide, -0.1, H - 2.25, W + 0.2, 2.4, fill=V.INK, alpha=0.55,
+         name="scrim")
+
+    eb = eyebrow(slide, MX, H - 1.98, "Our Students, Live On Stage",
+                 color=V.GOLD)
+    ttl = text(slide, MX, H - 1.6, W - 2 * MX, 1.0,
+               [para("Feel the rhythm of the hills", font=FE, size=44,
+                     color=V.WHITE, shadow=dict(blur=20, dist=3, alpha=55))],
+               name="title")
+    sub = text(slide, MX, H - 0.86, W - 2 * MX, 0.4,
+               [para("Real moments from Garh Kauthig \u2014 danced to the "
+                     "dhol-damau beat.", font=FB, size=14.5, color=V.GOLD)],
+               name="sub")
+    for s in eb:
+        tl.fade_in(s, delay=400)
+    tl.rise_in(ttl, delay=650, dur=1300)
+    tl.fade_in(sub, delay=1200, dur=1200)
+    if movie is not None:
+        tl.play_media(movie, loop=True, vol=85000, kind="video")
+    footer(slide, "In Motion")
+    tl.apply()
+    notes(slide, "Let it play. This is real footage of our own students "
+                 "performing at Garh Kauthig, set to the dhol-damau score \u2014 "
+                 "the surprise energy hit of the curtain-raiser.")
+
+
 def s_dances():
     culture_slide(
         bg=V.GREEN_DEEP, on_dark=True, eb_txt="Living Culture  ·  The Dance",
@@ -740,6 +821,7 @@ def build():
     s_represents()
     s_where()
     s_happens()
+    s_showcase()
     s_dances()
     s_music()
     s_attire()
