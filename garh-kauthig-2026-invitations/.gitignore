@@ -14,3 +14,7 @@ assets/background.png
 
 # toolchain
 node_modules
+
+# 300 dpi lossless rasters: ~12 MB each, regenerate with
+#   python3 src/make_images.py --with-png
+output/images/png-300dpi/

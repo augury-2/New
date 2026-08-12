@@ -52,6 +52,9 @@ python3 src/check_softmask.py
 echo "==> colour-managed CMYK rasters"
 python3 src/make_cmyk_tiff.py
 
+echo "==> flat images (JPG at 300 dpi + share size)"
+python3 src/make_images.py
+
 echo "==> web previews"
 python3 src/make_previews.py
 

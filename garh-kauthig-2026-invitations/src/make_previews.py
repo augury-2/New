@@ -27,7 +27,12 @@ LABELS = {
     '01-vice-chancellor': 'Vice Chancellor',
     '02-pro-vice-chancellor': 'Pro Vice Chancellor',
     '03-registrar': 'Registrar',
+    '04-faculty-members': 'Faculty Members',
+    '05-research-scholars': 'Research Scholars',
+    '06-mba-seniors-2025-27': 'MBA 2025-27 Seniors',
+    '07-mba-freshers-2026-28': 'MBA 2026-28 Freshers',
 }
+PER_ROW = 4
 
 
 def trimmed(path):
@@ -60,19 +65,24 @@ def main():
         panels.append((im.resize((CONTACT_W, ch), Image.LANCZOS),
                        next((v for k, v in LABELS.items() if k in name), name)))
 
-    # contact sheet
+    # contact sheet, wrapped so seven panels stay legible
     pad, cap = 26, 34
-    w = pad + sum(p.width + pad for p, _ in panels)
-    h = pad + max(p.height for p, _ in panels) + cap + pad
+    pw = panels[0][0].width
+    ph = max(p.height for p, _ in panels)
+    rows = (len(panels) + PER_ROW - 1) // PER_ROW
+    cols = min(len(panels), PER_ROW)
+    w = pad + cols * (pw + pad)
+    h = pad + rows * (ph + cap + pad)
     sheet = Image.new('RGB', (w, h), '#efe7d6')
     draw = ImageDraw.Draw(sheet)
-    x = pad
-    for p, label in panels:
-        sheet.paste(p, (x, pad))
-        draw.rectangle([x - 1, pad - 1, x + p.width, pad + p.height], outline='#b9a475')
+    for i, (p, label) in enumerate(panels):
+        r, c = divmod(i, PER_ROW)
+        x = pad + c * (pw + pad)
+        y = pad + r * (ph + cap + pad)
+        sheet.paste(p, (x, y))
+        draw.rectangle([x - 1, y - 1, x + p.width, y + p.height], outline='#b9a475')
         tw = draw.textlength(label)
-        draw.text((x + (p.width - tw) / 2, pad + p.height + 12), label, fill='#5c3a18')
-        x += p.width + pad
+        draw.text((x + (p.width - tw) / 2, y + p.height + 12), label, fill='#5c3a18')
     dst = os.path.join(OUT, 'contact-sheet.jpg')
     sheet.save(dst, 'JPEG', quality=90, optimize=True)
     print(f'  contact-sheet.jpg  {sheet.width}x{sheet.height}  '

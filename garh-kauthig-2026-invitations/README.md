@@ -1,14 +1,26 @@
 # Garh Kauthig 2026 — A3 Invitation Suite
 
-Three luxury A3 ceremonial invitation letters for **Garh Kauthig 2026**, issued by
-the Graphic Era School of Management with Swaragini, The Cultural Society of
-Graphic Era University, under the EMERGE Induction Program 2026.
+Seven luxury A3 invitations for **Garh Kauthig 2026**, issued by the Graphic Era
+School of Management with Swaragini, The Cultural Society of Graphic Era
+University, under the EMERGE Induction Program 2026. One visual identity; the
+wording is written afresh for each audience.
 
-| Recipient | Register of the letter |
+**Official letters** — measured, ceremonial register:
+
+| Recipient | Register |
 |---|---|
-| Vice Chancellor | visionary — heritage, the university's role as custodian of culture, national values |
+| Vice Chancellor | visionary — heritage, the university as custodian of culture, national values |
 | Pro Vice Chancellor | warm — student creativity, leadership, collaboration across cohorts |
 | Registrar | administrative — participation across programmes, institutional pride, preservation |
+
+**Community invitations** — written to be read for pleasure rather than filed:
+
+| Recipient | Register |
+|---|---|
+| Faculty Members | *"…when the dhol finds its rhythm and a room stops being an audience."* Another view of students you know from the lecture hall |
+| Research Scholars | *"Much of what a scholar chases through an archive, a kauthig keeps alive in a courtyard."* Living tradition, not exhibits |
+| MBA 2025–27 Seniors | *"This time last year somebody else was holding the door open for you."* Their turn to host |
+| MBA 2026–28 Freshers | *"You have barely unpacked and already there is a festival."* Belonging, from day one |
 
 ![All three invitations](output/preview/contact-sheet.jpg)
 
@@ -25,8 +37,23 @@ Everything is in `output/print-ready/`.
 | `rgb/` | `…-RGB-A3-bleed.pdf` | The press prefers to run its own ICC conversion, or you are printing digitally / in-house. This is the colour master and is verified pixel-faithful to the design. |
 | `cmyk-tiff/` | `…-CMYK-300dpi.tif` (28 MB) | Belt-and-braces. Flattened 300 dpi CMYK raster, ICC-converted, profile embedded — appearance cannot shift. Not committed to the repo; regenerate with `python3 src/make_cmyk_tiff.py`. |
 
-`output/preview/` holds screen-sized JPEGs (bleed trimmed off) for circulating
-internally and getting sign-off.
+### Flat images
+
+For sharing, slides, or a press that would rather have an image than a PDF:
+
+| Folder | What |
+|---|---|
+| `output/images/jpg-300dpi/` | **Print quality.** Exactly A3 at 300 dpi (3508 × 4961 px), bleed trimmed off, 300 dpi written into the file metadata so Word and Canva place it at A3. ~4 MB each. |
+| `output/images/jpg-share/` | 1400 px wide, ~0.4 MB — WhatsApp, email, social |
+| `output/images/png-300dpi/` | Lossless, ~12 MB each. Not kept in the repository; regenerate with `python3 src/make_images.py --with-png`. |
+
+The JPEGs are quality 95 with chroma subsampling off, which on this artwork is
+visually indistinguishable from the lossless PNG at a third of the size. The
+3 mm bleed is cropped from every image: bleed only exists so a printer can trim
+through it, and on a flat image it would show as a band outside the intended edge.
+
+`output/preview/` holds screen-sized JPEGs for circulating internally and getting
+sign-off.
 
 ### Print specification
 

@@ -238,7 +238,7 @@ ${ornaments}
     <div class="stage" data-fit="stage">
       ${masthead()}
       <div class="addressee">
-        <span class="desig">The ${L.designation}</span>
+        <span class="desig">${L.addressee}</span>
         <span class="org">${EVENT.university}, ${EVENT.city}, ${EVENT.state}</span>
       </div>
       <div class="standfirst">${L.subject}</div>
