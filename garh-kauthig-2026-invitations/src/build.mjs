@@ -134,7 +134,7 @@ const masthead = () => {
 const panel = () => `
   <aside class="panel" data-fit="panel">
     <div class="panel-weave">${patternFill('pat-ringaal', '')}</div>
-    <div class="panel-title">${EVENT.name.toUpperCase()} &middot; ${EVENT.year}</div>
+    <div class="panel-title">${EVENT.name.toUpperCase()}</div>
     <div class="panel-icons">
       ${PANEL_ICONS.map((id, i) => `
         ${use(id, 'ico')}
@@ -199,13 +199,6 @@ const footer = () => {
 
 const letterBody = (L) => `
   <div class="letter" data-fit="letter">
-    <div class="addressee">
-      <span class="desig">The ${L.designation}</span>
-      <span class="org">${EVENT.university}, ${EVENT.city}, ${EVENT.state}</span>
-    </div>
-
-    <div class="standfirst">${L.subject}</div>
-
     <div class="salutation">${L.salutation}</div>
 
     <div class="body-copy lead">
@@ -221,11 +214,11 @@ const letterBody = (L) => `
       ${L.paras.slice(2).map((p) => `<p>${p}</p>`).join('')}
     </div>
 
-    <div class="closing-mark">${use('orn-flourish')}</div>
-
     <div class="signoff">
       <div class="valediction"><span class="close">${L.valediction}</span></div>
     </div>
+
+    <div class="closing-mark">${use('orn-flourish')}</div>
   </div>`;
 
 const page = (L) => `<!DOCTYPE html>
@@ -244,6 +237,11 @@ ${ornaments}
     ${border()}
     <div class="stage" data-fit="stage">
       ${masthead()}
+      <div class="addressee">
+        <span class="desig">The ${L.designation}</span>
+        <span class="org">${EVENT.university}, ${EVENT.city}, ${EVENT.state}</span>
+      </div>
+      <div class="standfirst">${L.subject}</div>
       <div class="middle">
         ${panel()}
         ${letterBody(L)}

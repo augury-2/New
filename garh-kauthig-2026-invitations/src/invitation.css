@@ -37,7 +37,8 @@
   --traditional-red: #b8232a;
   --saffron: #e08a1e;
   --emerge-blue: #1f2a94;    /* the EMERGE mark on the poster             */
-  --antique-gold: #a9812c;
+  --antique-gold: #ab8129;
+  --gold-bright: #b98e2b;
   --brass-gold: #c9a24b;
   --gold-pale: #e6cd8a;
   --gold-deep: #7d5a15;
@@ -161,17 +162,17 @@ html, body {
       rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 34%, #000 74%, #000 100%);
 }
 .bg-mountains svg { display: block; width: 100%; height: 100%; }
-.mtn-far  { fill: #97a8ad; opacity: 0.11; }
-.mtn-mid  { fill: #7d9497; opacity: 0.12; }
-.mtn-near { fill: #55696a; opacity: 0.1; }
-.mtn-snow { fill: #ffffff; opacity: 0.38; }
+.mtn-far  { fill: #8ea6b4; opacity: 0.17; }
+.mtn-mid  { fill: #6f8d95; opacity: 0.18; }
+.mtn-near { fill: #4a6365; opacity: 0.15; }
+.mtn-snow { fill: #ffffff; opacity: 0.46; }
 
 /* low-opacity Garhwali motif field (aipan lattice) */
 .bg-motif {
   position: absolute;
   inset: 0;
   color: var(--antique-gold);
-  opacity: 0.07;
+  opacity: 0.1;
   -webkit-mask-image: radial-gradient(115% 80% at 50% 46%, #000 30%, rgba(0, 0, 0, 0.25) 72%, rgba(0, 0, 0, 0) 100%);
           mask-image: radial-gradient(115% 80% at 50% 46%, #000 30%, rgba(0, 0, 0, 0.25) 72%, rgba(0, 0, 0, 0) 100%);
 }
@@ -317,7 +318,7 @@ html, body {
    Solid ink is robust in every renderer, and on press a flat rich crimson and a
    flat antique gold are truer than a gradient anyway. */
 .foil {
-  color: var(--antique-gold);
+  color: var(--gold-bright);
 }
 
 .press-red {
@@ -351,7 +352,9 @@ html, body {
   align-items: flex-start;
   justify-content: space-between;
   gap: 10mm;
-  padding-bottom: 3.4mm;
+  /* clears the corner mandala (which reaches 35.4mm in from the trim) and lands
+     flush with the ends of the carved lintel band */
+  padding: 0 15mm 3.4mm;
   border-bottom: 0.16mm solid rgba(169, 129, 44, 0.55);
 }
 .lockup { display: flex; flex-direction: column; }
@@ -480,9 +483,9 @@ html, body {
 
 .theme-line {
   font-family: var(--caps);
-  font-size: 11.2pt;
+  font-size: 11.6pt;
   letter-spacing: 0.2em;
-  color: var(--dark-brown);
+  color: var(--deep-crimson);
   margin-top: 2.6mm;
 }
 
@@ -526,7 +529,7 @@ html, body {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   font-family: var(--display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 9.6pt;
   letter-spacing: 0.34em;
   color: var(--royal-maroon);
@@ -538,12 +541,12 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6mm;
+  gap: 5mm;
   color: var(--antique-gold);
 }
 .panel-icons .ico {
-  width: 24mm;
-  height: 15mm;
+  width: 23mm;
+  height: 13.5mm;
   display: block;
 }
 .panel-icons .bead {
@@ -555,9 +558,9 @@ html, body {
 
 .panel-rosette {
   margin-top: auto;
-  margin-bottom: 4mm;
-  width: 16mm;
-  height: 16mm;
+  margin-bottom: 3mm;
+  width: 14mm;
+  height: 14mm;
   color: var(--antique-gold);
   opacity: 0.8;
 }
@@ -572,7 +575,9 @@ html, body {
    an invitation.  The designation alone distinguishes the three letters.
    ------------------------------------------------------------------------ */
 .addressee {
+  flex: 0 0 auto;
   text-align: center;
+  margin-top: 1mm;
   padding-bottom: 4mm;
   border-bottom: 0.16mm solid rgba(169, 129, 44, 0.45);
 }
@@ -596,7 +601,8 @@ html, body {
 
 /* the former "Subject" line, now a standfirst rather than a form field */
 .standfirst {
-  margin-top: 5mm;
+  flex: 0 0 auto;
+  margin-top: 4.6mm;
   text-align: center;
   font-family: var(--serif);
   font-style: italic;
@@ -607,8 +613,8 @@ html, body {
 .standfirst em { font-style: normal; font-weight: 600; }
 
 .salutation {
-  margin-top: 6mm;
-  font-size: 13.4pt;
+  margin-top: 0;
+  font-size: 14pt;
   font-style: italic;
   color: var(--dark-brown);
 }
@@ -618,8 +624,8 @@ html, body {
 .body-copy { margin-top: 1.6mm; }
 .body-copy p {
   margin: 0;
-  font-size: 13.6pt;
-  line-height: 1.68;
+  font-size: 14.6pt;
+  line-height: 1.74;
   text-align: justify;
   text-justify: inter-word;
   hyphens: none;
@@ -633,7 +639,7 @@ html, body {
   float: left;
   font-family: var(--display-deco);
   font-weight: 700;
-  font-size: 33pt;
+  font-size: 35pt;
   line-height: 0.86;
   padding: 1.2mm 1.2mm 0 0;
   color: var(--crimson);
@@ -689,8 +695,8 @@ html, body {
 .closing-mark {
   flex: 0 0 auto;
   height: 14mm;
-  margin-top: auto;      /* slack collects above the closing group ... */
-  margin-bottom: 0;
+  margin-top: auto;      /* the ornament centres in the leftover measure */
+  margin-bottom: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -700,10 +706,9 @@ html, body {
 
 .signoff {
   flex: 0 0 auto;
-  margin-top: 4mm;
-  margin-bottom: auto;   /* ... and below it, keeping the pair together */
+  margin-top: 5mm;
 }
-.valediction { font-size: 13.4pt; text-align: center; }
+.valediction { font-size: 14pt; text-align: center; }
 .valediction .close { font-style: italic; }
 
 /* ==========================================================================
@@ -715,8 +720,8 @@ html, body {
   position: relative;
   border: 0.42mm solid var(--antique-gold);
   padding: 0;
-  background: #fffcf3;
-  box-shadow: inset 0 0 0 0.14mm #fffdf5;
+  background: #fdf6e3;
+  box-shadow: inset 0 0 0 0.14mm #fffdf3;
 }
 .infobox::before {
   content: '';
