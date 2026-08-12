@@ -8,6 +8,10 @@ computed in polar/parametric maths so it is exact and truly symmetrical;
 pictorial ornament (dhol-damau, hudka, ransingha, temple bell, hill house,
 dancers, jewellery) is hand-authored path data.
 
+No institutional emblem is drawn here.  The two university marks belong to the
+institutions and are set as type lockups (or dropped in as supplied artwork) by
+src/build.mjs instead.
+
 Everything is stroked/filled with `currentColor` so a single CSS colour drives
 the whole sheet -- which is how the antique-gold line art stays consistent.
 
@@ -616,76 +620,12 @@ def picto_symbols():
 
 
 # ===========================================================================
-#  Institutional seals (typographic placeholders -- swap for official art)
-# ===========================================================================
-def seal(sid, top_text, bottom_text, emblem):
-    """Circular seal. The lower legend runs on a reversed arc so it reads
-    upright instead of upside-down."""
-    ring = ('<circle cx="100" cy="100" r="96" stroke-width="1.5"/>'
-            '<circle cx="100" cy="100" r="89" stroke-width="3"/>'
-            '<circle cx="100" cy="100" r="62" stroke-width="1.1"/>')
-    beads = "".join(
-        f'<circle cx="{n(100 + 75.5 * math.cos(math.radians(a)))}" '
-        f'cy="{n(100 + 75.5 * math.sin(math.radians(a)))}" r="1.3" '
-        f'fill="currentColor" stroke="none"/>' for a in range(0, 360, 12))
-    # top legend: left -> right over the top (clockwise, sweep 1)
-    # bottom legend: left -> right under the bottom (counter-clockwise, sweep 0)
-    paths = (f'<path id="{sid}-top" d="M24,100 A76,76 0 0 1 176,100" fill="none"/>'
-             f'<path id="{sid}-bot" d="M28,100 A72,72 0 0 0 172,100" fill="none"/>')
-    txt = (f'<text class="seal-t"><textPath href="#{sid}-top" startOffset="50%" '
-           f'text-anchor="middle">{top_text}</textPath></text>'
-           f'<text class="seal-t" dy="9"><textPath href="#{sid}-bot" startOffset="50%" '
-           f'text-anchor="middle">{bottom_text}</textPath></text>')
-    stars = ('<g fill="currentColor" stroke="none">'
-             '<circle cx="16.5" cy="100" r="2.4"/><circle cx="183.5" cy="100" r="2.4"/></g>')
-    return (f'<symbol id="{sid}" viewBox="0 0 200 200">'
-            f'<g fill="none" stroke="currentColor" stroke-linecap="round" '
-            f'stroke-linejoin="round">{ring}{beads}</g>{paths}'
-            f'<g fill="currentColor">{txt}</g>{stars}{emblem}</symbol>')
-
-
-def seals():
-    # GESM emblem: an oil lamp / flame of learning above an open book
-    flame = """
-      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-         stroke-linejoin="round" transform="translate(100,86)">
-        <path d="M0,-34 C10,-20 16,-10 16,2 C16,14 8,22 0,22 C-8,22 -16,14 -16,2
-                 C-16,-10 -10,-20 0,-34 Z"/>
-        <path d="M0,-16 C5,-8 8,-2 8,4 C8,11 4,15 0,15 C-4,15 -8,11 -8,4
-                 C-8,-2 -5,-8 0,-16 Z" fill="currentColor" fill-opacity=".22"/>
-        <path d="M-30,30 L30,30" stroke-width="2.4"/>
-        <path d="M-30,30 C-22,38 -10,42 0,42 C10,42 22,38 30,30" stroke-width="1.6"/>
-        <path d="M0,42 L0,30" stroke-width="1.2"/>
-      </g>"""
-    # Swaragini emblem: a dhol with radiating notes of sound
-    dhol = """
-      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-         stroke-linejoin="round" transform="translate(100,88) scale(0.46) translate(-110,-75)">
-        <path d="M52,40 C86,31 134,31 168,40 C176,58 176,92 168,110 C134,119 86,119 52,110
-                 C44,92 44,58 52,40 Z" stroke-width="4"/>
-        <ellipse cx="52" cy="75" rx="11" ry="35" stroke-width="4"/>
-        <ellipse cx="168" cy="75" rx="11" ry="35" stroke-width="4"/>
-        <path d="M63,45 L86,75 L63,105 M86,43 L109,75 L86,107 M109,42 L132,75 L109,108
-                 M132,43 L155,75 L132,107" stroke-width="2.6"/>
-      </g>
-      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-         transform="translate(100,88)">
-        <path d="M-52,-16 Q-60,0 -52,16" stroke-opacity=".8"/>
-        <path d="M52,-16 Q60,0 52,16" stroke-opacity=".8"/>
-      </g>"""
-    return (seal("seal-gesm", "GRAPHIC ERA UNIVERSITY",
-                 "SCHOOL OF MANAGEMENT", flame)
-            + seal("seal-swaragini", "SWARAGINI",
-                   "CULTURAL SOCIETY", dhol))
-
-
-# ===========================================================================
 def build():
     parts = [
         corner_mandala(), lotus_divider(), small_flourish(), rosette(),
         pattern_aipan(), pattern_ringaal(), pattern_carving(), pattern_textile(),
         mountains(), peak_line(), pines(), prayer_flags(),
-        picto_symbols(), dancers(), seals(),
+        picto_symbols(), dancers(),
     ]
     svg = ('<svg xmlns="http://www.w3.org/2000/svg" '
            'xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" '

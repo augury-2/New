@@ -18,6 +18,18 @@ const ROOT = path.resolve(HERE, '..');
 
 const ornaments = await fs.readFile(path.join(ROOT, 'assets', 'ornaments.svg'), 'utf8');
 
+/* Official logo artwork, if it has been supplied.  Drop files named geu,
+   emerge, gesm or swaragini (.svg / .png / .jpg) into assets/logos/ and the
+   lockups below are replaced by the real marks automatically -- nothing else
+   needs editing.  Until then each slot is set as type, matching the poster
+   wording exactly; no emblem is invented. */
+const logoDir = path.join(ROOT, 'assets', 'logos');
+const logoFiles = await fs.readdir(logoDir).catch(() => []);
+const logo = (stem) => {
+  const hit = logoFiles.find((f) => f.replace(/\.[^.]+$/, '').toLowerCase() === stem);
+  return hit ? `../../assets/logos/${hit}` : null;
+};
+
 /* ------------------------------------------------------------- fragments */
 
 const use = (id, cls = '', extra = '') =>
@@ -43,8 +55,6 @@ const VIEWBOX = {
   'orn-jewellery': '0 0 180 140',
   'orn-kalash': '0 0 110 150',
   'orn-dancers': '0 0 324 172',
-  'seal-gesm': '0 0 200 200',
-  'seal-swaragini': '0 0 200 200',
 };
 
 const patternFill = (patId, cls) =>
@@ -89,29 +99,24 @@ const border = () => `
   <div class="corner bl">${use('orn-corner')}</div>
   <div class="corner br">${use('orn-corner')}</div>`;
 
-const masthead = () => `
+const masthead = () => {
+  const geu = logo('geu');
+  const emerge = logo('emerge');
+  return `
   <header class="masthead">
-    <div class="host-line">${EVENT.university.toUpperCase()} &middot; ${EVENT.city.toUpperCase()}</div>
-
-    <div class="logo-row">
-      <div class="logo-unit">
-        ${use('seal-gesm')}
-        <div class="logo-name">GRAPHIC ERA<br>SCHOOL OF MANAGEMENT</div>
+    <div class="lockup-row">
+      <div class="lockup left">${geu ? `<img src="${geu}" alt="Graphic Era (Deemed to be University), Dehradun">` : `
+        <div class="gew-1">Graphic Era</div>
+        <div class="gew-2"><span class="thin">deemed to be</span> <span class="bold">University</span></div>
+        <div class="gew-3">DEHRADUN</div>`}
       </div>
-      <div class="logo-div"></div>
-      <div class="logo-unit">
-        ${use('seal-swaragini')}
-        <div class="logo-name">SWARAGINI</div>
-        <div class="logo-sub">The Cultural Society of Graphic Era University</div>
+      <div class="lockup right">${emerge ? `<img src="${emerge}" alt="EMERGE Induction Program 2026">` : `
+        <div class="emg-1">EMERGE</div>
+        <div class="emg-rule"></div>
+        <div class="emg-2">${EVENT.programmeTag}</div>
+        <div class="emg-3">INDUCTION PROGRAM 2026</div>`}
       </div>
     </div>
-
-    <div class="programme">
-      <span class="seg"></span>
-      <span class="txt">${EVENT.programme}</span>
-      <span class="seg"></span>
-    </div>
-    <div class="programme-tag"><span class="tag">${EVENT.programmeTag}</span></div>
 
     <div class="title-deva">${EVENT.nameDevanagari}</div>
     <h1 class="title-main"><span class="face press-red">${EVENT.name}</span></h1>
@@ -127,6 +132,7 @@ const masthead = () => `
     <div class="theme-line">${EVENT.theme}</div>
     <div class="divider">${use('orn-divider')}</div>
   </header>`;
+};
 
 const panel = () => `
   <aside class="panel">
@@ -160,7 +166,7 @@ const infobox = () => `
         <div class="row"><span class="k">THEME</span>
           <span class="v"><em>${EVENT.theme}</em></span></div>
         <div class="row"><span class="k">PROGRAMME</span>
-          <span class="v">EMERGE &mdash; Induction Program 2026</span></div>
+          <span class="v">EMERGE Induction Program 2026</span></div>
       </div>
       <div class="vrule"></div>
       <div class="col">
@@ -188,7 +194,10 @@ const signatures = () => `
       </div>`).join('')}
   </div>`;
 
-const footer = () => `
+const footer = () => {
+  const gesm = logo('gesm');
+  const swaragini = logo('swaragini');
+  return `
   <footer class="footer">
     <div class="footer-rule">
       <span class="seg"></span>
@@ -196,31 +205,36 @@ const footer = () => `
       <span class="seg r"></span>
     </div>
     <div class="footer-hosts">
-      <span>${EVENT.hostA.toUpperCase()}</span>
-      <span class="dot">&#10022;</span>
-      <span>${EVENT.hostB.toUpperCase()}</span>
+      <div class="unit left">${gesm ? `<img src="${gesm}" alt="Graphic Era School of Management">` : `
+        <div class="fh-sans">Graphic Era<br>School of Management</div>`}
+      </div>
+      <div class="unit right">${swaragini ? `<img src="${swaragini}" alt="Swaragini, The Cultural Society of Graphic Era University">` : `
+        <div class="fh-red">Swaragini</div>
+        <div class="fh-sub">The Cultural Society of<br>Graphic Era University</div>`}
+      </div>
     </div>
     <div class="footer-addr">
       ${EVENT.university}, ${EVENT.city}, ${EVENT.state}
     </div>
   </footer>`;
+};
 
 const letterBody = (L) => `
   <div class="letter" data-fit="letter">
     <div class="meta">
-      <span>REF. NO. <span class="val">${L.ref}</span></span>
-      <span>DATE <span class="dotfill"></span></span>
+      <span><span class="lbl">REF</span>${L.ref}</span>
+      <span><span class="lbl">DATE</span><span class="dotfill"></span></span>
     </div>
 
     <div class="recipient">
-      <span class="to">TO,</span>
+      <span class="to">TO</span>
       <span class="name">${L.namePrefix ? L.namePrefix + ' ' : ''}<span class="dotfill" style="min-width:64mm"></span></span>
       <span class="desig">The ${L.designation}</span>
       <span class="org">${EVENT.university}, ${EVENT.city}, ${EVENT.state}</span>
     </div>
 
     <div class="subject">
-      <span class="lbl">SUBJECT&nbsp;&mdash;&nbsp;</span>${L.subject}
+      <span class="lbl">SUBJECT</span>${L.subject}
     </div>
 
     <div class="salutation">${L.salutation}</div>

@@ -77,16 +77,18 @@ esteemed presence"* — and none assigns that role.
 2. **The reference numbers** (`GESM / SWG / GK-2026 / INV / VC-01` and so on) are
    structural placeholders in the house format. Change them in `src/content.js`.
 
-### About the two logos
+### About the logos
 
-The poster supplied them only as low-resolution raster, and institutional marks
-should not be redrawn by eye. The header therefore carries **typographic seals
-built for this suite** — a lamp-and-book device for the School of Management, a
-dhol for Swaragini — as clearly-labelled stand-ins.
+**No emblem is invented anywhere in this suite.** The header and footer reproduce
+the poster's own lockups, set as type: *Graphic Era / deemed to be University /
+DEHRADUN* and *EMERGE / Discover. Connect. Excel. / Induction Program 2026*
+across the head, *Graphic Era School of Management* and *Swaragini, The Cultural
+Society of Graphic Era University* across the foot.
 
-**Before printing, replace them with the official artwork.** Drop the vector
-files into `assets/`, then swap the two `use('seal-…')` calls in the `masthead()`
-function of `src/build.mjs` for `<img>` tags. The slots are 19.5 mm square.
+**Before printing, drop the official artwork into
+[`assets/logos/`](assets/logos/README.md)** using the file stems `geu`, `emerge`,
+`gesm`, `swaragini`. The build detects them and replaces the type lockups
+automatically — no code change needed. SVG is strongly preferred at A3.
 
 ---
 
@@ -107,7 +109,8 @@ function of `src/build.mjs` for `<img>` tags. The slots are 19.5 mm square.
 - **Typography** Yellowtail for the display script (chosen to echo the poster's
   own lettering), Cormorant Garamond for the body, Cinzel and Marcellus SC for
   small caps and designations, Great Vibes for the calligraphic pull quote, Noto
-  Serif Devanagari for गढ़ कौथिग.
+  Serif Devanagari for गढ़ कौथिग, and Merriweather / Montserrat for the
+  institutional lockups.
 - **Print effects** gold-foil gradients clipped to live glyphs, an embossed
   border with light and shadow offsets, letterpress typography, textured stock
   and soft shadows on the information box.
@@ -155,6 +158,12 @@ Two details worth knowing if you modify the CSS:
 - A CSS `filter` on text forces Chromium to rasterise that heading. The
   letterpress effect is built from layered live text instead, which is why all
   type survives as vector.
+- There is **no page-wide `text-shadow`**. Chromium emits a second copy of every
+  glyph run to draw a shadow, which made all the text appear twice when copied
+  out of the PDF (`REF. NO. … REF. NO. …`). Depth comes from the embossed rules
+  and gradient-filled display type instead.
+- Cormorant Garamond defaults to old-style figures, which rendered `01:00 PM` as
+  `oi:oo PM`. `font-variant-numeric: lining-nums` is set on `.page`; keep it.
 
 `render.mjs` fails loudly if any block overflows the printable frame, so a
 too-long letter is caught at build time rather than at the printer.

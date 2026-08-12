@@ -58,26 +58,25 @@ export const LETTERS = [
     designation: 'Vice Chancellor',
     namePrefix: 'Prof. (Dr.)',
     subject:
-      'Invitation to grace <em>Garh Kauthig 2026</em> &mdash; a celebration of Garhwali heritage',
+      'An invitation to <em>Garh Kauthig 2026</em> &mdash; a celebration of Garhwali heritage',
     salutation: 'Respected Sir / Madam,',
     paras: [
-      'With the deepest respect, the Graphic Era School of Management and Swaragini &mdash; The ' +
-      'Cultural Society of Graphic Era University request the honour of your presence at ' +
-      '<strong>Garh Kauthig 2026</strong>, a festival of Garhwali music, dance and living tradition, ' +
-      'at the Silver Jubilee Convention Centre on Thursday, 13 August 2026, from 01:00 PM onwards.',
+      'It would be our great privilege to welcome you to <strong>Garh Kauthig 2026</strong> &mdash; ' +
+      'an afternoon of Garhwali music, dance and celebration at the Silver Jubilee Convention Centre ' +
+      'on Thursday, 13 August 2026, from 01:00 PM onwards.',
 
-      'A <em>kauthig</em> has never been merely a gathering. In the hills of Uttarakhand it is the ' +
-      'occasion on which a community renews itself &mdash; where the dhol and damau summon the ' +
-      'village, and the elder&rsquo;s song passes to the young. To bring it onto our campus is to ' +
-      'affirm that a university is a custodian of culture as much as of knowledge.',
+      'A <em>kauthig</em> is how the hills celebrate together. When the dhol and damau begin, the whole ' +
+      'village gathers, the old songs are sung again, and everyone belongs. That is the spirit we hope ' +
+      'to bring onto our campus.',
 
-      'We have placed the festival at the threshold of the academic year, within the EMERGE Induction ' +
-      'Program 2026, so that students newly arrived may discover at the outset that education is ' +
-      'inseparable from identity, and that a nation&rsquo;s values endure in what each generation ' +
-      'chooses to remember. Your presence would give the endeavour its fullest meaning, and we ' +
-      'request you most earnestly to grace the occasion with your esteemed presence.',
+      'We have placed the festival at the very start of the academic year, within the EMERGE Induction ' +
+      'Program 2026. Most of the students performing have only just joined us, and in learning the ' +
+      'music of their own hills and sharing it with their classmates, they find something of where they ' +
+      'come from &mdash; and of the University they now belong to. Your presence would mean a great ' +
+      'deal to every one of them, and we warmly invite you to grace the occasion with your esteemed ' +
+      'presence.',
     ],
-    valediction: 'With profound respect and warm regards,',
+    valediction: 'With warm regards and deep respect,',
   },
 
   {
@@ -86,26 +85,24 @@ export const LETTERS = [
     designation: 'Pro Vice Chancellor',
     namePrefix: 'Prof. (Dr.)',
     subject:
-      'Invitation to grace <em>Garh Kauthig 2026</em> and encourage our student performers',
+      'An invitation to <em>Garh Kauthig 2026</em> &mdash; and to cheer on our student performers',
     salutation: 'Respected Sir / Madam,',
     paras: [
-      'It is with genuine warmth that the Graphic Era School of Management and Swaragini &mdash; The ' +
-      'Cultural Society of Graphic Era University invite you to <strong>Garh Kauthig 2026</strong>, ' +
-      'our celebration of Garhwali folk tradition, at the Silver Jubilee Convention Centre on ' +
-      'Thursday, 13 August 2026, from 01:00 PM onwards.',
+      'We would be delighted to have you with us at <strong>Garh Kauthig 2026</strong>, our celebration ' +
+      'of Garhwali folk tradition, at the Silver Jubilee Convention Centre on Thursday, 13 August 2026, ' +
+      'from 01:00 PM onwards.',
 
-      'What we place before you has been built by the students themselves. They chose the songs and ' +
-      'set the choreography, gathered the traditional attire and ornaments, sought out the drummers, ' +
-      'and kept rehearsal hours long after class. The creativity is theirs, and so is the quiet ' +
-      'leadership that held it together.',
+      'Almost everything you will see has been put together by the students themselves. They chose the ' +
+      'songs and set the choreography, gathered the traditional attire and ornaments, found the ' +
+      'drummers, and stayed back long after class to rehearse.',
 
-      'Much of it was done across the boundaries we usually observe &mdash; between seniors and freshers, ' +
-      'between programmes, between those raised in these traditions and those meeting them for the ' +
-      'first time. We would be delighted if you could grace the occasion with your esteemed presence ' +
-      'and offer our participants a few words of encouragement, which for students beginning their ' +
-      'journey here outlast the applause.',
+      'Much of it has happened across the lines we usually draw &mdash; between seniors and freshers, ' +
+      'between programmes, between those who grew up with these traditions and those meeting them for ' +
+      'the first time. That, as much as the performance itself, is what we are proud of. A few words of ' +
+      'encouragement from you would stay with them long after the applause, and we warmly invite you to ' +
+      'grace the occasion with your esteemed presence.',
     ],
-    valediction: 'With sincere respect and warm regards,',
+    valediction: 'With warm regards,',
   },
 
   {
@@ -114,24 +111,22 @@ export const LETTERS = [
     designation: 'Registrar',
     namePrefix: '',
     subject:
-      'Invitation to grace <em>Garh Kauthig 2026</em>, a celebration of Uttarakhand&rsquo;s folk heritage',
+      'An invitation to <em>Garh Kauthig 2026</em> &mdash; a celebration of Uttarakhand&rsquo;s folk heritage',
     salutation: 'Respected Sir / Madam,',
     paras: [
-      'On behalf of the Graphic Era School of Management and Swaragini &mdash; The Cultural Society of ' +
-      'Graphic Era University, it is our privilege to invite you to <strong>Garh Kauthig 2026</strong>, ' +
-      'a celebration of the folk heritage of Uttarakhand, at the Silver Jubilee Convention Centre on ' +
-      'Thursday, 13 August 2026, from 01:00 PM onwards.',
+      'It is our pleasure to invite you to <strong>Garh Kauthig 2026</strong>, a celebration of the folk ' +
+      'heritage of Uttarakhand held as part of the EMERGE Induction Program 2026, at the Silver Jubilee ' +
+      'Convention Centre on Thursday, 13 August 2026, from 01:00 PM onwards.',
 
-      'The festival has been organised with wide participation from across our programmes. Students ' +
-      'have taken charge of the folk music and dance presentations, of traditional attire and ' +
-      'ornamentation, and of the conduct of the afternoon&rsquo;s proceedings &mdash; a matter of ' +
-      'considerable institutional pride.',
+      'Students from across our programmes have come together for it &mdash; taking charge of the music ' +
+      'and dance, the traditional attire and ornamentation, and the running of the afternoon itself. It ' +
+      'is a happy thing to see an event of this size resting so largely in their hands.',
 
-      'Our purpose is preservation as much as celebration: the dhol and damau, the hudka and the ' +
-      'ransingha survive chiefly through performance, and every occasion on which they are presented ' +
-      'to a young audience is one on which they are handed forward. We should be deeply honoured if ' +
-      'you would grace the occasion with your esteemed presence.',
+      'These traditions live on only by being performed. The dhol and damau, the hudka and the ' +
+      'ransingha, and the songs that go with them are handed on each time a young audience hears them. ' +
+      'That is exactly what we hope this afternoon will do. We would be honoured to have you with us, ' +
+      'and warmly invite you to grace the occasion with your esteemed presence.',
     ],
-    valediction: 'With respectful regards,',
+    valediction: 'With warm regards,',
   },
 ];

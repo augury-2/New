@@ -13,4 +13,4 @@ output/review/
 assets/background.png
 
 # toolchain
-node_modules/
+node_modules
