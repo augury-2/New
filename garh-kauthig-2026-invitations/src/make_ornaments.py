@@ -12,8 +12,14 @@ No institutional emblem is drawn here.  The two university marks belong to the
 institutions and are set as type lockups (or dropped in as supplied artwork) by
 src/build.mjs instead.
 
-Everything is stroked/filled with `currentColor` so a single CSS colour drives
-the whole sheet -- which is how the antique-gold line art stays consistent.
+<symbol> ornament is stroked with `currentColor`, so one CSS colour drives it --
+a <use> clones the symbol and inherits colour from the referencing element.
+
+<pattern> ornament CANNOT do that.  A pattern referenced as fill="url(#id)" is
+resolved in the context where it is *defined*, not where it is used, so
+`currentColor` inside a pattern picks up the colour of the hidden <defs> block
+(the body text colour) and ignores the band it is painting.  Pattern colours are
+therefore baked in explicitly below.
 
 Run:  python3 src/make_ornaments.py
 """
@@ -198,6 +204,13 @@ def rosette():
 # ===========================================================================
 #  Patterns: aipan lattice, ringaal weave, temple-carving band
 # ===========================================================================
+# Pattern ink, baked in because `currentColor` does not reach a <pattern>.
+INK_AIPAN = '#a9812c'     # antique gold; the plate lays this in at low opacity
+INK_TEXTILE = '#a35a1d'   # copper, likewise
+INK_CARVING = '#c9ad72'   # soft gold: a carved lintel, not a heavy black band
+INK_RINGAAL = '#dcc9a2'   # lighter still -- the woven sides are texture only
+
+
 def pattern_aipan():
     """Delicate aipan lattice -- fine diamond grid, four-petal flowers, dots."""
     u = 64
@@ -213,9 +226,10 @@ def pattern_aipan():
                      f'transform="translate({cx},{cy})" stroke-width="0.7"/>')
     for x, y in ((u/2, 9), (u/2, u - 9), (9, u/2), (u - 9, u/2)):
         g.append(f'<circle cx="{x}" cy="{y}" r="1.25" fill="currentColor" stroke="none"/>')
+    body = "".join(g).replace('currentColor', INK_AIPAN)
     return (f'<pattern id="pat-aipan" width="{u}" height="{u}" patternUnits="userSpaceOnUse">'
-            f'<g fill="none" stroke="currentColor" stroke-linejoin="round">'
-            f'{"".join(g)}</g></pattern>')
+            f'<g fill="none" stroke="{INK_AIPAN}" stroke-linejoin="round">'
+            f'{body}</g></pattern>')
 
 
 def pattern_ringaal():
@@ -259,7 +273,7 @@ def pattern_ringaal():
     d = " ".join(seg)
     return (f'<pattern id="pat-ringaal" width="{u}" height="{u}" patternUnits="userSpaceOnUse"'
             f' patternTransform="scale(0.709)">'
-            f'<g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">'
+            f'<g fill="none" stroke="{INK_RINGAAL}" stroke-width="1.1" stroke-linecap="round">'
             f'<path d="{d}"/></g></pattern>')
 
 
@@ -281,10 +295,11 @@ def pattern_carving():
         '<circle cx="0" cy="14.5" r="1.4" fill="currentColor" stroke="none"/>',
     ]
     # scaled so that 28 user units land on exactly 6 mm (22.68 CSS px)
+    body = "".join(g).replace('currentColor', INK_CARVING)
     return (f'<pattern id="pat-carving" width="72" height="28" patternUnits="userSpaceOnUse"'
             f' patternTransform="scale(0.81)">'
-            f'<g fill="none" stroke="currentColor" stroke-width="1.2" '
-            f'stroke-linecap="round" stroke-linejoin="round">{"".join(g)}</g></pattern>')
+            f'<g fill="none" stroke="{INK_CARVING}" stroke-width="1.2" '
+            f'stroke-linecap="round" stroke-linejoin="round">{body}</g></pattern>')
 
 
 def pattern_textile():
@@ -295,8 +310,9 @@ def pattern_textile():
          '<path d="M0,2 L24,2" stroke-width="1"/>',
          '<circle cx="6" cy="19" r="1.1" fill="currentColor" stroke="none"/>',
          '<circle cx="18" cy="19" r="1.1" fill="currentColor" stroke="none"/>']
+    body = "".join(g).replace('currentColor', INK_TEXTILE)
     return (f'<pattern id="pat-textile" width="{u}" height="{u}" patternUnits="userSpaceOnUse">'
-            f'<g fill="none" stroke="currentColor">{"".join(g)}</g></pattern>')
+            f'<g fill="none" stroke="{INK_TEXTILE}">{body}</g></pattern>')
 
 
 # ===========================================================================

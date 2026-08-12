@@ -227,17 +227,15 @@ html, body {
   inset: var(--frame-outer);
   border: 0.5mm solid var(--antique-gold);
   /* emboss: light catches the top-left, shadow falls bottom-right */
+  /* zero-blur offsets only -- see .band for why soft masks are avoided */
   box-shadow:
-    inset 0 0 0 0.12mm rgba(255, 252, 240, 0.75),
-    0 0 0 0.12mm rgba(255, 252, 240, 0.6),
-    0.28mm 0.28mm 0.5mm rgba(85, 58, 20, 0.16),
-    inset -0.2mm -0.2mm 0.4mm rgba(85, 58, 20, 0.1);
+    inset 0 0 0 0.12mm #fffcf0,
+    0 0 0 0.12mm #fffcf0;
 }
 
 .frame-mid {
   inset: var(--frame-mid);
   border: 0.16mm solid var(--brass-gold);
-  box-shadow: 0 0 0 0.1mm rgba(255, 252, 240, 0.5);
 }
 
 /* carved wooden band running just inside the outer rule */
@@ -247,15 +245,14 @@ html, body {
 .band {
   position: absolute;
   overflow: hidden;
-  color: var(--brass-gold);
-  opacity: 0.26;
+  /* Colour is baked into the pattern definitions (see make_ornaments.py):
+     `currentColor` does not reach across into a <pattern>. */
   pointer-events: none;
 }
 .band svg { display: block; width: 100%; height: 100%; }
 /* the woven side bands read as texture only -- the carved lintels carry the
    architectural accent, so the verticals are held well back */
-.band.left,
-.band.right { opacity: 0.13; }
+
 .band.top,
 .band.bottom { left: 40mm; right: 40mm; height: var(--band); }
 .band.top { top: var(--band-inset); }
@@ -310,54 +307,24 @@ html, body {
    PRINT-EFFECT UTILITIES
    ========================================================================== */
 
-/* Gold foil: a brushed-metal gradient clipped to the glyph outlines.
-   NOTE: the gradient is deliberately expressed with background-clip, which
-   Chromium exports as a PDF *shading* applied to live text -- the glyphs stay
-   vector.  A CSS `filter` here would force the whole heading to rasterise, so
-   the struck-edge highlight is done with text-shadow instead. */
+/* Display ink.
+   These used to be gradients clipped to the glyph outlines with
+   `background-clip: text`.  Chromium exports that as a soft-mask (SMask)
+   luminosity group, and any viewer with incomplete SMask support paints the
+   gradient *unmasked* -- the title came out as a solid maroon rectangle and the
+   year as a solid gold bar.  It happened to render correctly in Ghostscript and
+   Poppler, which is exactly why it was easy to miss.
+   Solid ink is robust in every renderer, and on press a flat rich crimson and a
+   flat antique gold are truer than a gradient anyway. */
 .foil {
-  background-image:
-    url('../assets/textures/gold-foil.png'),
-    linear-gradient(168deg,
-      #8a6415 0%, #c9a24b 14%, #f0dda6 30%, #b8912f 46%,
-      #8f6a18 60%, #d9bc6a 74%, #e8d295 86%, #9a7420 100%);
-  background-size: 60mm 60mm, 100% 100%;
-  background-blend-mode: overlay, normal;
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  text-shadow: none;   /* a shadow here would force the heading to rasterise */
+  color: var(--antique-gold);
 }
 
-/* crimson letterpress: the poster red, pressed into the sheet */
 .press-red {
-  background-image: linear-gradient(176deg, var(--crimson) 0%, var(--deep-crimson) 58%, var(--royal-maroon) 100%);
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  text-shadow: none;   /* a shadow here would force the heading to rasterise */
+  color: var(--deep-crimson);
 }
 
 .hair { border: 0; height: 0.16mm; background: var(--brass-gold); opacity: 0.85; }
-
-/* True letterpress, built from two live-text layers rather than a filter: a
-   pale copy sits a fraction of a millimetre below the inked face, so the glyph
-   looks pressed into the sheet.  Both layers stay vector in the PDF. */
-.emboss-pair { position: relative; display: block; }
-.emboss-pair .under,
-.emboss-pair .face { display: block; }
-.emboss-pair .under {
-  position: absolute;
-  left: 0; right: 0; top: 0;
-  color: rgba(255, 252, 242, 0.42);
-  -webkit-text-fill-color: rgba(255, 252, 242, 0.42);
-  transform: translateY(0.1mm);
-  text-shadow: none;
-  z-index: 0;
-}
-.emboss-pair .face { position: relative; z-index: 1; }
 
 /* ==========================================================================
    HEADER
@@ -494,16 +461,7 @@ html, body {
   margin: 0 0 0;
   letter-spacing: 0.005em;
 }
-/* Yellowtail's swash and descender reach well past a 1.0 line box, and
-   `background-clip: text` only paints inside the border box -- without this the
-   tips of the 'G' and 'g' render unfilled.  The negative margin cancels the
-   padding so the vertical rhythm is untouched.  Scoped to .face only: the
-   absolutely-positioned emboss layer must not be padded or it drifts out of
-   registration. */
-.title-main .face {
-  padding: 10mm 0;
-  margin: -10mm 0;
-}
+.title-main .face { display: block; }
 .title-year {
   display: flex;
   align-items: center;
@@ -544,13 +502,7 @@ html, body {
   padding: 4mm 0;
   border-left: 0.16mm solid var(--brass-gold);
   border-right: 0.16mm solid var(--brass-gold);
-  background:
-    linear-gradient(180deg,
-      rgba(253, 249, 239, 0) 0%,
-      rgba(236, 222, 191, 0.72) 10%,
-      rgba(236, 222, 191, 0.85) 50%,
-      rgba(236, 222, 191, 0.72) 90%,
-      rgba(253, 249, 239, 0) 100%);
+  background: #efe3c8;
 }
 .panel::before,
 .panel::after {
@@ -558,8 +510,7 @@ html, body {
   position: absolute;
   left: 1.4mm; right: 1.4mm;
   height: 0.16mm;
-  background: var(--brass-gold);
-  opacity: 0.7;
+  background: #d9bc7b;
 }
 .panel::before { top: 2mm; }
 .panel::after { bottom: 2mm; }
@@ -568,8 +519,6 @@ html, body {
 .panel-weave {
   position: absolute;
   inset: 3mm 1.4mm;
-  color: var(--copper);
-  opacity: 0.07;
 }
 .panel-weave svg { display: block; width: 100%; height: 100%; }
 
@@ -578,10 +527,10 @@ html, body {
   transform: rotate(180deg);
   font-family: var(--display);
   font-weight: 600;
-  font-size: 8.6pt;
+  font-size: 9.6pt;
   letter-spacing: 0.34em;
   color: var(--royal-maroon);
-  margin: 0.5mm 0 2.5mm;
+  margin: 2mm 0 4mm;
   white-space: nowrap;
 }
 
@@ -589,12 +538,12 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.2mm;
+  gap: 6mm;
   color: var(--antique-gold);
 }
 .panel-icons .ico {
-  width: 20mm;
-  height: 11.5mm;
+  width: 24mm;
+  height: 15mm;
   display: block;
 }
 .panel-icons .bead {
@@ -606,46 +555,13 @@ html, body {
 
 .panel-rosette {
   margin-top: auto;
-  width: 12mm;
-  height: 12mm;
+  margin-bottom: 4mm;
+  width: 16mm;
+  height: 16mm;
   color: var(--antique-gold);
   opacity: 0.8;
 }
 .panel-rosette svg { display: block; width: 100%; height: 100%; }
-
-.panel-glance {
-  margin-top: 4mm;
-  width: 100%;
-  text-align: center;
-  padding: 0 1.6mm;
-}
-.panel-glance .lbl {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 6pt;
-  letter-spacing: 0.16em;
-  color: var(--royal-maroon);
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  margin: 0 auto 2.5mm;
-}
-.panel-glance .item {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 5.4pt;
-  letter-spacing: 0.05em;
-  color: var(--dark-brown);
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  margin: 0 auto;
-  white-space: nowrap;
-  line-height: 1.5;
-}
-.panel-glance .sep {
-  width: 8mm; height: 0.16mm;
-  background: var(--brass-gold);
-  margin: 1.8mm auto;
-}
 
 /* ==========================================================================
    LETTER BODY
@@ -736,11 +652,9 @@ html, body {
 .pull::after {
   content: '';
   position: absolute;
-  left: 14mm; right: 14mm;
+  left: 34mm; right: 34mm;
   height: 0.16mm;
-  background: linear-gradient(90deg,
-    rgba(201, 162, 75, 0) 0%, var(--brass-gold) 22%,
-    var(--brass-gold) 78%, rgba(201, 162, 75, 0) 100%);
+  background: var(--brass-gold);
 }
 .pull::before { top: 0; }
 .pull::after { bottom: 0; }
@@ -780,8 +694,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--antique-gold);
-  opacity: 0.72;
+  color: #c1a262;
 }
 .closing-mark svg { width: 52mm; height: 100%; display: block; }
 
@@ -797,14 +710,13 @@ html, body {
    EVENT INFORMATION BOX
    ========================================================================== */
 .infobox {
-  margin-top: 6mm;
+  flex: 0 0 auto;
+  margin-top: 7mm;
   position: relative;
   border: 0.42mm solid var(--antique-gold);
   padding: 0;
-  background: rgba(255, 252, 243, 0.72);
-  box-shadow:
-    inset 0 0 0 0.14mm rgba(255, 253, 245, 0.9),
-    0 0.5mm 1.1mm rgba(85, 58, 20, 0.11);
+  background: #fffcf3;
+  box-shadow: inset 0 0 0 0.14mm #fffdf5;
 }
 .infobox::before {
   content: '';
@@ -834,8 +746,8 @@ html, body {
 .infobox .grid {
   display: grid;
   grid-template-columns: 1fr 0.16mm 1fr;
-  column-gap: 5mm;
-  padding: 2.8mm 5mm 3.2mm;
+  column-gap: 10mm;
+  padding: 3.2mm 9mm 3.6mm;
 }
 .infobox .vrule { background: rgba(201, 162, 75, 0.6); }
 .infobox .col { display: flex; flex-direction: column; gap: 1.6mm; }
@@ -878,9 +790,8 @@ html, body {
 .footer-rule .seg {
   flex: 1 1 auto;
   height: 0.16mm;
-  background: linear-gradient(90deg, rgba(201,162,75,0) 0%, var(--brass-gold) 40%, var(--brass-gold) 100%);
+  background: var(--brass-gold);
 }
-.footer-rule .seg.r { background: linear-gradient(270deg, rgba(201,162,75,0) 0%, var(--brass-gold) 40%, var(--brass-gold) 100%); }
 .footer-rule svg { width: 38mm; height: 6.4mm; display: block; }
 
 .footer-hosts {

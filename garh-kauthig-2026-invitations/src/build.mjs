@@ -122,10 +122,7 @@ const masthead = () => {
     <h1 class="title-main"><span class="face press-red">${EVENT.name}</span></h1>
     <div class="title-year">
       <span class="wing"></span>
-      <span class="yr emboss-pair">
-        <span class="under" aria-hidden="true">${EVENT.year}</span>
-        <span class="face foil">${EVENT.year}</span>
-      </span>
+      <span class="yr foil">${EVENT.year}</span>
       <span class="wing"></span>
     </div>
 
@@ -144,16 +141,6 @@ const panel = () => `
         ${i < PANEL_ICONS.length - 1 ? '<span class="bead"></span>' : ''}`).join('')}
     </div>
     <div class="panel-rosette">${use('orn-rosette')}</div>
-    <div class="panel-glance">
-      <div class="sep"></div>
-      <div class="lbl">AT A GLANCE</div>
-      <div class="item">${EVENT.dateShort}</div>
-      <div class="sep"></div>
-      <div class="item">${EVENT.timeShort}</div>
-      <div class="sep"></div>
-      <div class="item">${EVENT.venueShort}</div>
-      <div class="sep"></div>
-    </div>
   </aside>`;
 
 const infobox = () => `
@@ -239,8 +226,6 @@ const letterBody = (L) => `
     <div class="signoff">
       <div class="valediction"><span class="close">${L.valediction}</span></div>
     </div>
-
-    ${infobox()}
   </div>`;
 
 const page = (L) => `<!DOCTYPE html>
@@ -263,6 +248,7 @@ ${ornaments}
         ${panel()}
         ${letterBody(L)}
       </div>
+      ${infobox()}
       ${footer()}
     </div>
   </div>

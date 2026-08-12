@@ -114,10 +114,11 @@ automatically — no code change needed. SVG is strongly preferred at A3.
   small caps and designations, Great Vibes for the calligraphic pull quote, Noto
   Serif Devanagari for गढ़ कौथिग, and Merriweather / Montserrat for the
   institutional lockups.
-- **Print effects** gold-foil gradients clipped to live glyphs, an embossed
-  border with light and shadow offsets, textured stock and soft shadows on the
-  information box. No filled colour panels anywhere: every accent is a rule, a
-  gradient on type, or ornament.
+- **Layout** masthead across the full measure, then the decorative spine beside
+  the letter, then the information box spanning the sheet to anchor the foot.
+- **Print effects** an embossed border of crisp gold rules, textured stock,
+  letterpress body type. Display type is **solid ink, not gradient** — see the
+  soft-mask note below for why that matters more than the effect did.
 
 ---
 
@@ -168,6 +169,17 @@ Two details worth knowing if you modify the CSS:
   and gradient-filled display type instead.
 - Cormorant Garamond defaults to old-style figures, which rendered `01:00 PM` as
   `oi:oo PM`. `font-variant-numeric: lining-nums` is set on `.page`; keep it.
+- **Do not use `background-clip: text`, gradients that fade to transparent, or
+  blurred `box-shadow`.** Chromium exports all three as PDF soft-mask groups, and
+  a viewer with incomplete soft-mask support paints the masked content *unmasked*
+  — a gradient clipped to the title arrived as a solid maroon rectangle and the
+  year as a gold bar. It renders correctly in Ghostscript and Poppler, so it will
+  not show up in a local proof. `src/check_softmask.py` runs in the build and
+  fails if any of it returns.
+- `currentColor` does not reach into an SVG `<pattern>`. A pattern referenced as
+  `fill="url(#id)"` resolves colour where it is *defined*, so it picked up the
+  body text colour and painted the border bands near-black. Pattern colours are
+  baked into `make_ornaments.py`; `<symbol>` + `<use>` ornament is fine.
 
 `render.mjs` fails loudly if any block overflows the printable frame, so a
 too-long letter is caught at build time rather than at the printer.

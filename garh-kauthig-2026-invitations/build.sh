@@ -46,6 +46,9 @@ node src/render.mjs
 echo "==> prepress (trim/bleed boxes, CMYK, crop marks)"
 python3 src/prepress.py
 
+echo "==> audit: no fragile soft-mask constructs"
+python3 src/check_softmask.py
+
 echo "==> colour-managed CMYK rasters"
 python3 src/make_cmyk_tiff.py
 

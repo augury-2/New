@@ -48,7 +48,7 @@ export const LETTERS = [
     designation: 'Vice Chancellor',
     subject:
       'An invitation to <em>Garh Kauthig 2026</em> &mdash; a celebration of Garhwali heritage',
-    salutation: 'Respected Sir / Madam,',
+    salutation: 'Respected Sir,',
     paras: [
       'It would be our great privilege to welcome you to <strong>Garh Kauthig 2026</strong> &mdash; ' +
       'an afternoon of Garhwali music, dance and celebration at the Silver Jubilee Convention Centre ' +
@@ -73,7 +73,7 @@ export const LETTERS = [
     designation: 'Pro Vice Chancellor',
     subject:
       'An invitation to <em>Garh Kauthig 2026</em> &mdash; and to cheer on our student performers',
-    salutation: 'Respected Sir / Madam,',
+    salutation: 'Respected Sir,',
     paras: [
       'We would be delighted to have you with us at <strong>Garh Kauthig 2026</strong>, our celebration ' +
       'of Garhwali folk tradition, at the Silver Jubilee Convention Centre on Thursday, 13 August 2026, ' +
@@ -97,7 +97,7 @@ export const LETTERS = [
     designation: 'Registrar',
     subject:
       'An invitation to <em>Garh Kauthig 2026</em> &mdash; a celebration of Uttarakhand&rsquo;s folk heritage',
-    salutation: 'Respected Sir / Madam,',
+    salutation: 'Respected Sir,',
     paras: [
       'It is our pleasure to invite you to <strong>Garh Kauthig 2026</strong>, a celebration of the folk ' +
       'heritage of Uttarakhand held as part of the EMERGE Induction Program 2026, at the Silver Jubilee ' +
