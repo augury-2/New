@@ -68,14 +68,17 @@ The poster also names **no Chief Guest or Inaugural Guest**. All three letters
 therefore use neutral ceremonial wording — *"grace the occasion with your
 esteemed presence"* — and none assigns that role.
 
-### Two things you must fill in before printing
+### This reads as an invitation, not as an office letter
 
-1. **The recipient's name and the dispatch date** are dotted fill-in rules, as on
-   conventional university letterhead. To set them in type instead, edit
-   `namePrefix` in `src/content.js` and replace the `dotfill` spans in
-   `src/build.mjs`.
-2. **The reference numbers** (`GESM / SWG / GK-2026 / INV / VC-01` and so on) are
-   structural placeholders in the house format. Change them in `src/content.js`.
+The formal letterhead apparatus has been deliberately stripped out: there is no
+reference number, no dispatch date, no `To` block, no `Prof. (Dr.)` rule to fill
+in by hand, and no row of coordinator signature placeholders. The filled maroon
+bar that used to head the information box is gone too — it read as a stuck-on
+rectangle rather than part of the sheet.
+
+What identifies each letter is the addressee line — *The Vice Chancellor* — set
+under the title, and the wording of the letter itself. Nothing on the sheet needs
+completing by hand before it goes to print.
 
 ### About the logos
 
@@ -112,8 +115,9 @@ automatically — no code change needed. SVG is strongly preferred at A3.
   Serif Devanagari for गढ़ कौथिग, and Merriweather / Montserrat for the
   institutional lockups.
 - **Print effects** gold-foil gradients clipped to live glyphs, an embossed
-  border with light and shadow offsets, letterpress typography, textured stock
-  and soft shadows on the information box.
+  border with light and shadow offsets, textured stock and soft shadows on the
+  information box. No filled colour panels anywhere: every accent is a rule, a
+  gradient on type, or ornament.
 
 ---
 
@@ -124,7 +128,7 @@ sheet — so it is genuinely editable rather than a flattened export.
 
 | I want to change… | Edit |
 |---|---|
-| letter wording, subjects, reference numbers, signatories | `src/content.js` |
+| letter wording, standfirst lines, event details | `src/content.js` |
 | layout, palette, type scale, print effects | `src/invitation.css` |
 | page structure, logo slots, side-panel icons | `src/build.mjs` |
 | ornament and motif drawings | `src/make_ornaments.py` |

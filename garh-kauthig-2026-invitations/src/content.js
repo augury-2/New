@@ -20,7 +20,6 @@ export const EVENT = {
   venue: 'Silver Jubilee Convention Centre',
   venueSub: 'Graphic Era (Deemed to be University)',
   venueShort: 'SILVER JUBILEE CONVENTION CENTRE',
-  programme: 'EMERGE \u00b7 INDUCTION PROGRAM 2026',
   programmeTag: 'Discover. Connect. Excel.',
   university: 'Graphic Era (Deemed to be University)',
   city: 'Dehradun',
@@ -29,14 +28,6 @@ export const EVENT = {
   hostB: 'Swaragini',
   hostBFull: 'Swaragini \u2014 The Cultural Society of Graphic Era University',
 };
-
-/* Signature placeholders, common to all three letters. */
-export const SIGNATORIES = [
-  { role: 'Event Coordinator', org: 'Garh Kauthig 2026' },
-  { role: 'Program Coordinator', org: 'EMERGE Induction Program 2026' },
-  { role: 'Faculty Coordinator', org: 'Swaragini \u2014 Cultural Society' },
-  { role: 'Head', org: 'Graphic Era School of Management' },
-];
 
 /* The decorative side panel: motif icons, top to bottom. */
 export const PANEL_ICONS = ['orn-dhol', 'orn-dancers', 'orn-ransingha', 'orn-bell'];
@@ -54,9 +45,7 @@ export const PANEL_ICONS = ['orn-dhol', 'orn-dancers', 'orn-ransingha', 'orn-bel
 export const LETTERS = [
   {
     id: '01-vice-chancellor',
-    ref: 'GESM / SWG / GK-2026 / INV / VC-01',
     designation: 'Vice Chancellor',
-    namePrefix: 'Prof. (Dr.)',
     subject:
       'An invitation to <em>Garh Kauthig 2026</em> &mdash; a celebration of Garhwali heritage',
     salutation: 'Respected Sir / Madam,',
@@ -81,9 +70,7 @@ export const LETTERS = [
 
   {
     id: '02-pro-vice-chancellor',
-    ref: 'GESM / SWG / GK-2026 / INV / PVC-02',
     designation: 'Pro Vice Chancellor',
-    namePrefix: 'Prof. (Dr.)',
     subject:
       'An invitation to <em>Garh Kauthig 2026</em> &mdash; and to cheer on our student performers',
     salutation: 'Respected Sir / Madam,',
@@ -107,9 +94,7 @@ export const LETTERS = [
 
   {
     id: '03-registrar',
-    ref: 'GESM / SWG / GK-2026 / INV / REG-03',
     designation: 'Registrar',
-    namePrefix: '',
     subject:
       'An invitation to <em>Garh Kauthig 2026</em> &mdash; a celebration of Uttarakhand&rsquo;s folk heritage',
     salutation: 'Respected Sir / Madam,',

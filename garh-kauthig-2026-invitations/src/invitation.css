@@ -632,8 +632,8 @@ html, body {
 .panel-glance .item {
   font-family: var(--display);
   font-weight: 600;
-  font-size: 5.8pt;
-  letter-spacing: 0.1em;
+  font-size: 5.4pt;
+  letter-spacing: 0.05em;
   color: var(--dark-brown);
   writing-mode: vertical-rl;
   transform: rotate(180deg);
@@ -650,72 +650,49 @@ html, body {
 /* ==========================================================================
    LETTER BODY
    ========================================================================== */
-.meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  font-family: var(--serif);
-  font-size: 10pt;
-  letter-spacing: 0.02em;
-  color: var(--dark-brown);
-  opacity: 0.92;
-  padding-bottom: 1.6mm;
+/* ------------------------------------------------------------------------
+   Addressee.  Deliberately spare: no "To", no reference number, no dispatch
+   date and no name rule to fill in -- those read as an office memo rather than
+   an invitation.  The designation alone distinguishes the three letters.
+   ------------------------------------------------------------------------ */
+.addressee {
+  text-align: center;
+  padding-bottom: 4mm;
   border-bottom: 0.16mm solid rgba(169, 129, 44, 0.45);
 }
-.meta .lbl {
-  font-family: var(--caps);
-  font-size: 7.6pt;
-  letter-spacing: 0.16em;
-  color: var(--copper);
-  margin-right: 1.4mm;
-}
-.dotfill {
-  display: inline-block;
-  min-width: 26mm;
-  border-bottom: 0.3mm dotted rgba(69, 48, 26, 0.72);
-}
-
-.recipient {
-  margin-top: 3mm;
-  font-size: 11.4pt;
-  line-height: 1.36;
-}
-.recipient .to { font-family: var(--caps); font-size: 8.4pt; letter-spacing: 0.16em; color: var(--copper); }
-.recipient .name {
-  display: block;
-  margin-top: 0.9mm;
-  font-size: 12.4pt;
-}
-.recipient .desig {
+.addressee .desig {
   display: block;
   font-family: var(--display);
-  font-weight: 600;
-  font-size: 11.8pt;
-  letter-spacing: 0.1em;
+  font-weight: 700;
+  font-size: 17pt;
+  letter-spacing: 0.12em;
   color: var(--royal-maroon);
-  margin-top: 0.6mm;
 }
-.recipient .org { display: block; font-style: italic; font-size: 10.8pt; opacity: 0.9; }
+.addressee .org {
+  display: block;
+  margin-top: 1.4mm;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 12.4pt;
+  color: var(--dark-brown);
+  opacity: 0.92;
+}
 
-.subject {
-  margin-top: 3.4mm;
-  padding: 1.7mm 0 1.9mm;
-  border-top: 0.16mm solid rgba(168, 128, 42, 0.45);
-  border-bottom: 0.16mm solid rgba(168, 128, 42, 0.45);
-  font-size: 10.6pt;
+/* the former "Subject" line, now a standfirst rather than a form field */
+.standfirst {
+  margin-top: 5mm;
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14pt;
   line-height: 1.4;
+  color: var(--deep-crimson);
 }
-.subject .lbl {
-  font-family: var(--caps);
-  font-size: 8.4pt;
-  letter-spacing: 0.16em;
-  color: var(--copper);
-  margin-right: 1.2mm;
-}
+.standfirst em { font-style: normal; font-weight: 600; }
 
 .salutation {
-  margin-top: 3.4mm;
-  font-size: 12.4pt;
+  margin-top: 6mm;
+  font-size: 13.4pt;
   font-style: italic;
   color: var(--dark-brown);
 }
@@ -725,14 +702,14 @@ html, body {
 .body-copy { margin-top: 1.6mm; }
 .body-copy p {
   margin: 0;
-  font-size: 12.2pt;
-  line-height: 1.58;
+  font-size: 13.6pt;
+  line-height: 1.68;
   text-align: justify;
   text-justify: inter-word;
   hyphens: none;
   text-indent: 8mm;
 }
-.body-copy p + p { margin-top: 2mm; }
+.body-copy p + p { margin-top: 2.8mm; }
 .body-copy.lead p:first-child { text-indent: 0; }
 
 /* illuminated drop cap -- opening paragraph only */
@@ -740,9 +717,9 @@ html, body {
   float: left;
   font-family: var(--display-deco);
   font-weight: 700;
-  font-size: 30pt;
+  font-size: 33pt;
   line-height: 0.86;
-  padding: 1.2mm 2mm 0 0;
+  padding: 1.2mm 1.2mm 0 0;
   color: var(--crimson);
   text-shadow: 0 0.18mm 0 rgba(255, 250, 238, 0.9);
 }
@@ -770,7 +747,7 @@ html, body {
 .pull q { quotes: none; }
 .pull .quote {
   font-family: var(--calligraphy);
-  font-size: 21pt;
+  font-size: 25pt;
   line-height: 1.2;
   color: var(--deep-crimson);
   display: block;
@@ -798,8 +775,8 @@ html, body {
 .closing-mark {
   flex: 0 0 auto;
   height: 14mm;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-top: auto;      /* slack collects above the closing group ... */
+  margin-bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -808,44 +785,13 @@ html, body {
 }
 .closing-mark svg { width: 52mm; height: 100%; display: block; }
 
-.signoff { flex: 0 0 auto; }
-.valediction { font-size: 12.8pt; }
+.signoff {
+  flex: 0 0 auto;
+  margin-top: 4mm;
+  margin-bottom: auto;   /* ... and below it, keeping the pair together */
+}
+.valediction { font-size: 13.4pt; text-align: center; }
 .valediction .close { font-style: italic; }
-
-/* ------------------------------------------------------- signature blocks */
-.signatures {
-  display: flex;
-  gap: 5mm;
-  margin-top: 5mm;
-}
-.sig {
-  flex: 1 1 0;
-  text-align: center;
-  min-width: 0;
-  padding-top: 8mm;   /* clear space for an actual signature */
-}
-.sig .line {
-  height: 0.2mm;
-  background: var(--dark-brown);
-  opacity: 0.55;
-  margin-bottom: 1.5mm;
-}
-.sig .role {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 7.4pt;
-  letter-spacing: 0.1em;
-  color: var(--royal-maroon);
-  line-height: 1.35;
-}
-.sig .org {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 7.4pt;
-  color: var(--dark-brown);
-  opacity: 0.8;
-  line-height: 1.3;
-}
 
 /* ==========================================================================
    EVENT INFORMATION BOX
@@ -867,38 +813,43 @@ html, body {
   border: 0.16mm solid rgba(201, 162, 75, 0.75);
   pointer-events: none;
 }
+/* Heading set straight on the paper -- the filled maroon bar that used to sit
+   here read as a stuck-on rectangle. */
 .infobox .cap {
   text-align: center;
-  background: linear-gradient(180deg, var(--royal-maroon), #5a0e1a);
-  color: var(--gold-pale);
+  color: var(--copper);
   font-family: var(--display);
   font-weight: 700;
-  font-size: 8pt;
-  letter-spacing: 0.3em;
-  text-indent: 0.3em;
-  padding: 1.1mm 0 1mm;
-  margin: 1.2mm 1.2mm 0;
-  text-shadow: none;
+  font-size: 8.4pt;
+  letter-spacing: 0.32em;
+  text-indent: 0.32em;
+  padding: 3.4mm 0 0;
+}
+.infobox .cap-rule {
+  width: 34mm;
+  height: 0.16mm;
+  background: var(--brass-gold);
+  margin: 1.8mm auto 0;
 }
 .infobox .grid {
   display: grid;
   grid-template-columns: 1fr 0.16mm 1fr;
   column-gap: 5mm;
-  padding: 1.7mm 4.5mm 1.9mm;
+  padding: 2.8mm 5mm 3.2mm;
 }
 .infobox .vrule { background: rgba(201, 162, 75, 0.6); }
-.infobox .col { display: flex; flex-direction: column; gap: 0.8mm; }
+.infobox .col { display: flex; flex-direction: column; gap: 1.6mm; }
 .infobox .row { display: flex; flex-direction: column; }
 .infobox .k {
   font-family: var(--display);
   font-weight: 600;
-  font-size: 6.6pt;
+  font-size: 7pt;
   letter-spacing: 0.2em;
   color: var(--copper);
 }
 .infobox .v {
-  font-size: 9.7pt;
-  line-height: 1.2;
+  font-size: 10.4pt;
+  line-height: 1.26;
   color: var(--ink);
   margin-top: 0.3mm;
 }
@@ -911,7 +862,7 @@ html, body {
   text-align: center;
 }
 .infobox .wide .k { margin-right: 2mm; }
-.infobox .wide .v { font-size: 9.6pt; display: inline; }
+.infobox .wide .v { font-size: 10pt; display: inline; }
 
 /* ==========================================================================
    FOOTER

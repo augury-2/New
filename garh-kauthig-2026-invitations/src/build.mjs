@@ -11,7 +11,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { EVENT, LETTERS, SIGNATORIES, PANEL_ICONS } from './content.js';
+import { EVENT, LETTERS, PANEL_ICONS } from './content.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
@@ -135,7 +135,7 @@ const masthead = () => {
 };
 
 const panel = () => `
-  <aside class="panel">
+  <aside class="panel" data-fit="panel">
     <div class="panel-weave">${patternFill('pat-ringaal', '')}</div>
     <div class="panel-title">${EVENT.name.toUpperCase()} &middot; ${EVENT.year}</div>
     <div class="panel-icons">
@@ -159,6 +159,7 @@ const panel = () => `
 const infobox = () => `
   <section class="infobox">
     <div class="cap">THE OCCASION</div>
+    <div class="cap-rule"></div>
     <div class="grid">
       <div class="col">
         <div class="row"><span class="k">EVENT</span>
@@ -183,16 +184,6 @@ const infobox = () => `
       </div>
     </div>
   </section>`;
-
-const signatures = () => `
-  <div class="signatures">
-    ${SIGNATORIES.map((s) => `
-      <div class="sig">
-        <div class="line"></div>
-        <div class="role">${s.role}</div>
-        <div class="org">${s.org}</div>
-      </div>`).join('')}
-  </div>`;
 
 const footer = () => {
   const gesm = logo('gesm');
@@ -221,21 +212,12 @@ const footer = () => {
 
 const letterBody = (L) => `
   <div class="letter" data-fit="letter">
-    <div class="meta">
-      <span><span class="lbl">REF</span>${L.ref}</span>
-      <span><span class="lbl">DATE</span><span class="dotfill"></span></span>
-    </div>
-
-    <div class="recipient">
-      <span class="to">TO</span>
-      <span class="name">${L.namePrefix ? L.namePrefix + ' ' : ''}<span class="dotfill" style="min-width:64mm"></span></span>
+    <div class="addressee">
       <span class="desig">The ${L.designation}</span>
       <span class="org">${EVENT.university}, ${EVENT.city}, ${EVENT.state}</span>
     </div>
 
-    <div class="subject">
-      <span class="lbl">SUBJECT</span>${L.subject}
-    </div>
+    <div class="standfirst">${L.subject}</div>
 
     <div class="salutation">${L.salutation}</div>
 
@@ -255,10 +237,7 @@ const letterBody = (L) => `
     <div class="closing-mark">${use('orn-flourish')}</div>
 
     <div class="signoff">
-      <div class="valediction">
-        <span class="close">${L.valediction}</span>
-      </div>
-      ${signatures()}
+      <div class="valediction"><span class="close">${L.valediction}</span></div>
     </div>
 
     ${infobox()}
