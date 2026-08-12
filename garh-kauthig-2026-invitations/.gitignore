@@ -1,0 +1,16 @@
+# Large, fully regenerable artefacts. Rebuild any of these with ./build.sh
+#
+#   output/png/                  300 dpi RGB rasters   (~13 MB each)
+#   output/print-ready/cmyk-tiff 300 dpi CMYK rasters  (~28 MB each)
+#   output/pdf/                  Chromium intermediates; print-ready/rgb is the
+#                                same artwork with trim/bleed boxes applied
+#   output/review/               working crops from design review
+#   assets/background.png        intermediate; background.jpg is the one used
+output/png/
+output/pdf/
+output/print-ready/cmyk-tiff/
+output/review/
+assets/background.png
+
+# toolchain
+node_modules/

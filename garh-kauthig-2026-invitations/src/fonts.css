@@ -1,0 +1,19 @@
+/* Typefaces embedded with this project (Google Fonts, SIL Open Font
+   License 1.1 -- see assets/fonts/OFL.txt).  Only the weights and styles
+   the design actually uses are shipped. */
+
+@font-face{font-family:'Cinzel';font-style:normal;font-weight:600;font-display:block;src:url('../assets/fonts/cinzel-600.ttf') format('truetype');}
+@font-face{font-family:'Cinzel';font-style:normal;font-weight:700;font-display:block;src:url('../assets/fonts/cinzel-700.ttf') format('truetype');}
+@font-face{font-family:'Cinzel Decorative';font-style:normal;font-weight:400;font-display:block;src:url('../assets/fonts/cinzel-decorative-400.ttf') format('truetype');}
+@font-face{font-family:'Cinzel Decorative';font-style:normal;font-weight:700;font-display:block;src:url('../assets/fonts/cinzel-decorative-700.ttf') format('truetype');}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:400;font-display:block;src:url('../assets/fonts/cormorant-garamond-400-italic.ttf') format('truetype');}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:500;font-display:block;src:url('../assets/fonts/cormorant-garamond-500-italic.ttf') format('truetype');}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:600;font-display:block;src:url('../assets/fonts/cormorant-garamond-600-italic.ttf') format('truetype');}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:400;font-display:block;src:url('../assets/fonts/cormorant-garamond-400.ttf') format('truetype');}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:500;font-display:block;src:url('../assets/fonts/cormorant-garamond-500.ttf') format('truetype');}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:600;font-display:block;src:url('../assets/fonts/cormorant-garamond-600.ttf') format('truetype');}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:700;font-display:block;src:url('../assets/fonts/cormorant-garamond-700.ttf') format('truetype');}
+@font-face{font-family:'Great Vibes';font-style:normal;font-weight:400;font-display:block;src:url('../assets/fonts/great-vibes-400.ttf') format('truetype');}
+@font-face{font-family:'Marcellus SC';font-style:normal;font-weight:400;font-display:block;src:url('../assets/fonts/marcellus-sc-400.ttf') format('truetype');}
+@font-face{font-family:'Noto Serif Devanagari';font-style:normal;font-weight:400;font-display:block;src:url('../assets/fonts/noto-serif-devanagari-400.ttf') format('truetype');}
+@font-face{font-family:'Yellowtail';font-style:normal;font-weight:400;font-display:block;src:url('../assets/fonts/yellowtail-400.ttf') format('truetype');}

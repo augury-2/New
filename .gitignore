@@ -1,0 +1,3 @@
+# Local toolchain installed for rendering (Puppeteer + bundled Chromium)
+tools/
+node_modules/
