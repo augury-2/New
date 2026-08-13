@@ -128,15 +128,41 @@ India offers a theoretically and empirically justified context. It is one of the
 
 5.1 Sample profile
 
-Descriptive analysis (IBM SPSS 25.0) profiled the 312 respondents: 143 men (46%) and 169 women (54%), distributed across five age bands from 18 to 45 years, the largest aged 23–28 (24.04%). In terms of marital status, 34.29% were single, 38.78% married without children and 26.93% married with children; occupationally, 39.10% were in business, 32.69% in salaried employment and 28.21% students. Monthly family income clustered in the INR 50,001–80,000 (32.05%) and INR 30,001–50,000 (25.64%) bands.
+Table 1 profiles the 312 respondents (IBM SPSS 25.0). The sample is balanced by gender and spread across five age bands from 18 to 45 years, and most respondents report frequent metaverse use together with prior participation in NFT trading, social interaction or content creation, and virtual events—activities central to brand engagement.
 
-Engagement was substantial: 16.67% of respondents used the metaverse daily, 31.41% several times a week and 23.38% weekly, while 45.19% traded NFTs, 52.56% engaged in social interaction or content creation and 41.35% attended virtual events—activities central to brand engagement.
+Table 1. Demographic and metaverse engagement details of respondents (N = 312)
+
+| Participants' Information | No. of Participants | % | Participants' Information | No. of Participants | % |
+|---|---|---|---|---|---|
+| Gender |   |   | Metaverse Engagement Frequency |   |   |
+| Male | 143 | 46.00 | Daily | 52 | 16.67 |
+| Female | 169 | 54.00 | Several times a week | 98 | 31.41 |
+|   |   |   | Weekly | 73 | 23.38 |
+| Age (Years) |   |   | Monthly | 54 | 17.31 |
+| 18–22 | 64 | 20.51 | Rarely | 35 | 11.21 |
+| 23–28 | 75 | 24.04 |   |   |   |
+| 29–34 | 60 | 19.23 | NFT Interaction |   |   |
+| 35–41 | 57 | 18.27 | Yes | 141 | 45.19 |
+| 42–45 | 56 | 17.95 | No | 171 | 54.81 |
+| Marital Status |   |   | Virtual Event Participation |   |   |
+| Single | 107 | 34.29 | Yes | 129 | 41.35 |
+| Married with children | 84 | 26.93 | No | 183 | 58.65 |
+| Married without children | 121 | 38.78 | Social Interaction/Content Creation |   |   |
+|   |   |   | Yes | 164 | 52.56 |
+| Occupation |   |   | No | 148 | 47.44 |
+| Students | 88 | 28.21 | Monthly Family Income |   |   |
+| Job | 102 | 32.69 | INR 30,000 or less | 57 | 18.40 |
+| Business | 122 | 39.10 | INR 30,001–50,000 | 80 | 25.64 |
+|   |   |   | INR 50,001–80,000 | 100 | 32.05 |
+|   |   |   | INR 80,001 and above | 75 | 23.91 |
+
+Source: Authors
 
 5.2 Measurement model assessment
 
-All standardised loadings were positive and significant (p < .001), and Cronbach’s alpha ranged from 0.765 to 0.903 across the four constructs, exceeding the conventional benchmark (Nunnally and Bernstein, 1994). Detailed measurement properties, including average variance extracted (Fornell and Larcker, 1981), are reported in Table 1 following the conventions of Hair et al. (2019). Discriminant validity was assessed using the heterotrait–monotrait (HTMT) ratio (Henseler et al., 2015) obtained from SmartPLS 4.1 bootstrapping with 5,000 subsamples: all ratios fell below the 0.85 criterion (BSAT–BSUC 0.743; UX–BSAT 0.768; UX–BSUC 0.712; UE–BSAT 0.756; UE–BSUC 0.729; UE–UX 0.814), confirming that the constructs are empirically distinct.
+All standardised loadings were positive and significant (p < .001), and Cronbach’s alpha ranged from 0.765 to 0.903 across the four constructs, exceeding the conventional benchmark (Nunnally and Bernstein, 1994). Detailed measurement properties, including average variance extracted (Fornell and Larcker, 1981), are reported in Table 2 following the conventions of Hair et al. (2019). Discriminant validity was assessed using the heterotrait–monotrait (HTMT) ratio (Henseler et al., 2015) obtained from SmartPLS 4.1 bootstrapping with 5,000 subsamples: all ratios fell below the 0.85 criterion (BSAT–BSUC 0.743; UX–BSAT 0.768; UX–BSUC 0.712; UE–BSAT 0.756; UE–BSUC 0.729; UE–UX 0.814), confirming that the constructs are empirically distinct.
 
-Table 1. Measurement model: item loadings, reliability and average variance extracted
+Table 2. Measurement model: item loadings, reliability and average variance extracted
 
 | Measurement properties | Measurement properties | Measurement properties | Measurement properties | Measurement properties | Measurement properties |   |   |
 |---|---|---|---|---|---|---|---|
@@ -183,7 +209,7 @@ To analyse UE, UX, BSAT and BSUC, raw responses were calibrated (Ragin, 2008) in
 
 Calibration used three anchors: the 95th percentile for full membership (0.95), the 50th as the crossover point (0.50) and the 5th for full non-membership (0.05), which constrains scores to the 0–1 interval (Ragin, 2008; Douglas et al., 2020). This shared scale permits direct comparison of the calibrated UE, UX, BSAT and BSUC values.
 
-Table 2. Necessity and sufficiency analysis of conditions and configurations for high brand success (BSUC)
+Table 3. Necessity and sufficiency analysis of conditions and configurations for high brand success (BSUC)
 
 | Condition / configuration | BSAT | UX | UE | Consistency | Raw coverage | Unique coverage | Combined coverage |
 |---|---|---|---|---|---|---|---|
@@ -199,7 +225,7 @@ User Experience (UX), User Engagement (UE), Brand Satisfaction (BSAT), and Brand
 
 Note: Model BSUC = f (BSAT, UX, UE). ● = condition present in the configuration; blank = "don’t care" (condition irrelevant for that configuration). Unique coverage is reported for the three sufficient configurations of the intermediate solution. Overall solution coverage: 0.323827; overall solution consistency: 0.756327. A condition qualifies as necessary only where consistency exceeds 0.90.	Source: Authors
 
-Table 2 reports the intermediate solution for BSUC = f(BSAT, UX, UE). Three two-condition configurations—BSAT × UX, BSAT × UE and UX × UE—are each sufficient for high brand success and together account for approximately 32% of the outcome, at an overall solution consistency of 0.756.
+Table 3 reports the intermediate solution for BSUC = f(BSAT, UX, UE). Three two-condition configurations—BSAT × UX, BSAT × UE and UX × UE—are each sufficient for high brand success and together account for approximately 32% of the outcome, at an overall solution consistency of 0.756.
 
 In the model (Figure 2), UX, UE and BSAT act as the antecedent conditions for BSUC. The subset–superset analysis establishes which combinations are jointly sufficient for high brand success rather than estimating a single directional path, which anchors the conceptual model in the empirical configurations.
 
@@ -211,17 +237,17 @@ The subset–superset analysis broadens this picture. The triadic path (BSAT × 
 
 5.3.2 Necessity analysis
 
-Necessity analysis establishes whether a condition must be present for the outcome to occur; a condition qualifies as necessary only if its consistency exceeds 0.90 (Schneider and Wagemann, 2012). As Table 2 shows, none of the single conditions approaches that threshold. High brand success therefore depends on combinations rather than on any individually essential condition, which motivates the sufficiency analysis.
+Necessity analysis establishes whether a condition must be present for the outcome to occur; a condition qualifies as necessary only if its consistency exceeds 0.90 (Schneider and Wagemann, 2012). As Table 3 shows, none of the single conditions approaches that threshold. High brand success therefore depends on combinations rather than on any individually essential condition, which motivates the sufficiency analysis.
 
 5.3.3 Sufficiency analysis
 
-The sufficiency analysis identifies the configurations that are jointly sufficient. UE, UX and BSAT were entered into the truth table with consistency and frequency thresholds applied (Ragin, 2008; Schneider and Wagemann, 2012). As Table 2 reports, brand satisfaction appears in every high-consistency sufficient path, whereas engagement and experience contribute in combination rather than in isolation—a pattern consistent with prior evidence on engagement–loyalty links (Jeong and Kim, 2019) and social-media effects on customer equity (Ebrahim, 2020).
+The sufficiency analysis identifies the configurations that are jointly sufficient. UE, UX and BSAT were entered into the truth table with consistency and frequency thresholds applied (Ragin, 2008; Schneider and Wagemann, 2012). As Table 3 reports, brand satisfaction appears in every high-consistency sufficient path, whereas engagement and experience contribute in combination rather than in isolation—a pattern consistent with prior evidence on engagement–loyalty links (Jeong and Kim, 2019) and social-media effects on customer equity (Ebrahim, 2020).
 
 User engagement in this setting is multifaceted—asset trading, event attendance, social interaction and content creation—and reflects psychological, social and experiential motivations that the UE and UX constructs capture rather than platform-specific variables.
 
 5.4 Hypothesis evaluation
 
-fsQCA tests sufficiency rather than net linear effects, so the hypotheses are evaluated configurationally against Table 2. Consistent with the necessity result, user engagement and user experience are not sufficient in isolation; they support brand success only in combination, which supports H1 and H2 within sufficient configurations. Brand satisfaction appears in every high-consistency path and records the highest single-condition consistency, indicating the central, mediation-consistent role posited in H3. The presence of three sufficient configurations rather than one necessary condition supports the equifinality proposition (P1). A formal bootstrap mediation test would provide a useful complement.
+fsQCA tests sufficiency rather than net linear effects, so the hypotheses are evaluated configurationally against Table 3. Consistent with the necessity result, user engagement and user experience are not sufficient in isolation; they support brand success only in combination, which supports H1 and H2 within sufficient configurations. Brand satisfaction appears in every high-consistency path and records the highest single-condition consistency, indicating the central, mediation-consistent role posited in H3. The presence of three sufficient configurations rather than one necessary condition supports the equifinality proposition (P1). A formal bootstrap mediation test would provide a useful complement.
 
 6. Discussion
 
