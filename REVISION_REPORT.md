@@ -179,8 +179,9 @@ is retained.
 8. **Figure 1 was never cited** in the text; it is now cited in 2.2.
 9. **Spelling** mixed British and American forms (favourable/favorable, standardised/standardized, utilising/utilizing); standardised to British throughout the body text. Reference titles were left exactly as published.
 10. **"FsQCA" / "fsQCA" / "Fuzzy set" / "Fuzzy-set"** were used interchangeably; standardised to "fsQCA" and "fuzzy-set qualitative comparative analysis".
-11. **Measurement table header banner** read "Factor Loadings" above columns that also report alpha, AVE, SE, Z and p; changed to "Measurement properties".
-12. **Income percentages in Table 1 do not match their counts** (see item 7 in section 6). The values were left exactly as reported.
+11. **Headings carried no outline level.** The manuscript formats headings manually (bold Times New Roman) rather than with Word's Heading styles, so Word's navigation pane and any generated table of contents showed nothing at all, which makes sections appear to be missing when the file is skimmed. Outline levels (and keep-with-next) were applied to all 30 headings; their on-page appearance is unchanged.
+12. **Measurement table header banner** read "Factor Loadings" above columns that also report alpha, AVE, SE, Z and p; changed to "Measurement properties".
+13. **Income percentages in Table 1 do not match their counts** (see item 7 in section 6). The values were left exactly as reported.
 
 ---
 
