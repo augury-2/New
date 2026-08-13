@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ornament proof sheet</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+  body{margin:0;padding:30px;background:#fbf6ea;font-family:'Marcellus SC',serif;}
+  h1{font-family:'Cinzel',serif;color:#7a1220;letter-spacing:.1em;font-size:22px;}
+  .grid{display:flex;flex-wrap:wrap;gap:18px;}
+  .cell{background:#fdf9f0;border:1px solid #d8c69a;padding:10px;width:250px;
+        display:flex;flex-direction:column;align-items:center;gap:8px;}
+  .cell b{font-size:11px;letter-spacing:.12em;color:#6b4a1c;}
+  .art{color:#a8791f;}
+  .band{width:100%;height:34px;color:#a8791f;}
+  .seal{color:#8d1b2d;}
+  .mtn-far{fill:#7d94a0;opacity:.30}.mtn-mid{fill:#5f7a83;opacity:.34}
+  .mtn-near{fill:#40575c;opacity:.30}.mtn-snow{fill:#ffffff;opacity:.55}
+  .seal-t{font-family:'Cinzel',serif;font-size:12.5px;font-weight:600;letter-spacing:.06em;}
+  .seal-m{font-family:'Cinzel',serif;font-size:15px;letter-spacing:.1em;}
+  .corner{background:#fffdf7;position:relative;width:230px;height:230px;}
+  .corner svg{position:absolute;top:6px;left:6px;width:170px;height:170px;}
+</style>
+</head>
+<body>
+<h1>Garh Kauthig 2026 &mdash; ornament proof sheet</h1>
+<div id="lib"></div>
+<div class="grid" id="grid"></div>
+
+<script>
+const picto = ['dhol','damau','hudka','ransingha','bell','house','jewellery','kalash'];
+const misc  = [['orn-dancers',230,120],['orn-pines',140,120],['orn-flags',210,80],
+               ['orn-peakline',230,60],['orn-rosette',90,90],['orn-flourish',180,60],
+               ['orn-divider',230,40],['orn-mountains',230,110]];
+const pats  = ['pat-aipan','pat-ringaal','pat-carving','pat-textile'];
+
+fetch('../assets/ornaments.svg').then(r=>r.text()).then(t=>{
+  document.getElementById('lib').innerHTML = t;
+  const g = document.getElementById('grid');
+  let h = '';
+  h += `<div class="cell"><b>CORNER MANDALA</b><div class="corner art">
+        <svg viewBox="0 0 134 134"><use href="#orn-corner" width="134" height="134"/></svg></div></div>`;
+  for (const p of picto)
+    h += `<div class="cell"><b>${p.toUpperCase()}</b>
+          <svg class="art" width="200" height="140"><use href="#orn-${p}" width="200" height="140"/></svg></div>`;
+  for (const [id,w,ht] of misc)
+    h += `<div class="cell"><b>${id}</b>
+          <svg class="art" width="${w}" height="${ht}"><use href="#${id}" width="${w}" height="${ht}"/></svg></div>`;
+  for (const p of pats)
+    h += `<div class="cell"><b>${p}</b>
+          <svg class="art" width="220" height="90"><rect width="220" height="90" fill="url(#${p})"/></svg></div>`;
+  h += `<div class="cell"><b>SEAL GESM</b><svg class="seal" width="180" height="180"><use href="#seal-gesm" width="180" height="180"/></svg></div>`;
+  h += `<div class="cell"><b>SEAL SWARAGINI</b><svg class="seal" width="180" height="180"><use href="#seal-swaragini" width="180" height="180"/></svg></div>`;
+  g.innerHTML = h;
+  document.body.dataset.ready = '1';
+});
+</script>
+</body>
+</html>

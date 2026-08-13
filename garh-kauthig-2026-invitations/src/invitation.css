@@ -1,0 +1,864 @@
+/* ==========================================================================
+   GARH KAUTHIG 2026 -- A3 ceremonial invitation suite
+   Graphic Era School of Management  x  Swaragini, The Cultural Society
+   --------------------------------------------------------------------------
+   Page   : A3 portrait 297 x 420 mm + 3 mm bleed on every edge = 303 x 426 mm
+   Units  : all layout is expressed in millimetres so the CSS *is* the
+            print spec -- 1 mm here is 1 mm on the sheet.
+   Colour : authored in sRGB for screen; the print pipeline converts the
+            finished PDF to DeviceCMYK (see src/to_cmyk.sh).
+   ========================================================================== */
+
+/* ------------------------------------------------------------------ tokens */
+:root {
+  /* --- trim + bleed geometry ------------------------------------------- */
+  --bleed: 3mm;
+  --trim-w: 297mm;
+  --trim-h: 420mm;
+
+  --frame-outer: 8mm;      /* outer gold rule, inset from trim            */
+  --frame-mid: 14mm;       /* inner hairline rule                        */
+  --band: 6mm;             /* carved / woven band between the two rules   */
+  --band-inset: 8.6mm;     /* where that band starts                     */
+  --corner-size: 26mm;     /* corner mandala                             */
+  --corner-inset: 9.4mm;
+
+  --stage-x: 25mm;         /* content inset from trim, left + right       */
+  --stage-top: 19mm;
+  --stage-bottom: 17mm;
+
+  --panel-w: 33mm;         /* decorative side panel                      */
+  --panel-gap: 8mm;
+
+  /* --- palette ---------------------------------------------------------- */
+  --royal-maroon: #6f1119;
+  --deep-crimson: #9c1c22;
+  --crimson: #c0272d;        /* sampled from the poster wordmark          */
+  --traditional-red: #b8232a;
+  --saffron: #e08a1e;
+  --emerge-blue: #1f2a94;    /* the EMERGE mark on the poster             */
+  --antique-gold: #ab8129;
+  --gold-bright: #b98e2b;
+  --brass-gold: #c9a24b;
+  --gold-pale: #e6cd8a;
+  --gold-deep: #7d5a15;
+  --copper: #a35a1d;
+  --himalayan-green: #2e5d4e;
+  --ivory: #fdf8ec;
+  --ivory-warm: #f9f0da;
+  --beige: #efe2c4;
+  --dark-brown: #45301a;
+  --ink: #33241a;
+  --near-black: #1a1a1a;
+
+  /* --- type ------------------------------------------------------------- */
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --caps: 'Marcellus SC', 'Cinzel', serif;
+  --display: 'Cinzel', serif;
+  --display-deco: 'Cinzel Decorative', 'Cinzel', serif;
+  --script: 'Yellowtail', 'Great Vibes', cursive;
+  --calligraphy: 'Great Vibes', cursive;
+  --deva: 'Noto Serif Devanagari', serif;
+  --lockup-serif: 'Merriweather', Georgia, serif;   /* university wordmark */
+  --lockup-sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ------------------------------------------------------------------ reset */
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #6b6257;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+@page {
+  size: 303mm 426mm;
+  margin: 0;
+}
+
+.page {
+  position: relative;
+  width: 303mm;
+  height: 426mm;
+  overflow: hidden;
+  background: var(--ivory);
+  font-family: var(--serif);
+  color: var(--ink);
+  /* Cormorant Garamond defaults to old-style figures, which turned '01:00 PM'
+     into 'oi:oo PM' and '2026' into a dipping '2o26'.  Lining figures keep every
+     date, time and reference number reading cleanly. */
+  font-variant-numeric: lining-nums;
+  font-feature-settings: 'lnum' 1;
+  /* No global text-shadow: Chromium emits a second copy of every glyph run for
+     the shadow, which made all the text appear twice when copied out of the PDF
+     ("REF. NO. ... REF. NO. ...").  The letterpress feel is carried by the
+     embossed rules and the gradient-filled display type instead. */
+}
+
+/* the trim area -- everything compositional lives inside this */
+.trim {
+  position: absolute;
+  left: var(--bleed);
+  top: var(--bleed);
+  width: var(--trim-w);
+  height: var(--trim-h);
+}
+
+/* ==========================================================================
+   BACKGROUND STACK
+   ivory paper -> watercolour mountains -> motif field -> texture -> vignette
+   ========================================================================== */
+/* The flattened background plate that the print files actually reference.
+   Regenerate with:  node src/build.mjs && node src/render.mjs --bake  */
+.bg-baked {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/background.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* ---- authoring source for that plate (only rendered by --bake) ---------- */
+.bg { position: absolute; inset: 0; overflow: hidden; isolation: isolate; }
+
+/* layered warm ground: a little more colour towards the foot of the sheet */
+.bg-ground {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 70% at 50% 8%, #fffdf6 0%, rgba(255, 253, 246, 0) 62%),
+    radial-gradient(95% 58% at 50% 100%, #f2e4c3 0%, rgba(242, 228, 195, 0) 72%),
+    linear-gradient(178deg, var(--ivory) 0%, var(--ivory-warm) 55%, var(--beige) 100%);
+}
+
+/* sun halo behind the title -- the warmth in the poster sky */
+.bg-halo {
+  position: absolute;
+  left: 50%;
+  top: 74mm;
+  width: 220mm;
+  height: 220mm;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle,
+    rgba(224, 138, 30, 0.13) 0%,
+    rgba(224, 138, 30, 0.06) 38%,
+    rgba(224, 138, 30, 0) 68%);
+}
+
+/* watercolour Himalaya across the foot of the sheet */
+.bg-mountains {
+  position: absolute;
+  left: -3mm;
+  right: -3mm;
+  bottom: 0;
+  height: 104mm;
+  filter: blur(0.6mm);
+  -webkit-mask-image: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 34%, #000 74%, #000 100%);
+          mask-image: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 34%, #000 74%, #000 100%);
+}
+.bg-mountains svg { display: block; width: 100%; height: 100%; }
+.mtn-far  { fill: #8ea6b4; opacity: 0.17; }
+.mtn-mid  { fill: #6f8d95; opacity: 0.18; }
+.mtn-near { fill: #4a6365; opacity: 0.15; }
+.mtn-snow { fill: #ffffff; opacity: 0.46; }
+
+/* low-opacity Garhwali motif field (aipan lattice) */
+.bg-motif {
+  position: absolute;
+  inset: 0;
+  color: var(--antique-gold);
+  opacity: 0.1;
+  -webkit-mask-image: radial-gradient(115% 80% at 50% 46%, #000 30%, rgba(0, 0, 0, 0.25) 72%, rgba(0, 0, 0, 0) 100%);
+          mask-image: radial-gradient(115% 80% at 50% 46%, #000 30%, rgba(0, 0, 0, 0.25) 72%, rgba(0, 0, 0, 0) 100%);
+}
+.bg-motif svg { display: block; width: 100%; height: 100%; }
+
+/* folk-textile band echoing a pankhi weave, low in the composition */
+.bg-textile {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 26mm;
+  height: 34mm;
+  color: var(--copper);
+  opacity: 0.07;
+}
+.bg-textile svg { display: block; width: 100%; height: 100%; }
+
+/* handmade-paper fibre + tooth, multiplied over everything */
+.bg-paper {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/textures/paper-fiber.png');
+  background-size: 172mm 172mm;
+  background-repeat: repeat;
+  mix-blend-mode: multiply;
+  opacity: 0.42;
+}
+.bg-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/textures/paper-grain.png');
+  background-size: 27mm 27mm;
+  mix-blend-mode: multiply;
+  opacity: 0.24;
+}
+
+/* deckle-edge warmth so the sheet does not read as flat white */
+.bg-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(125% 100% at 50% 50%,
+    rgba(109, 78, 30, 0) 60%,
+    rgba(109, 78, 30, 0.045) 86%,
+    rgba(109, 78, 30, 0.1) 100%);
+}
+
+/* ==========================================================================
+   BORDER -- embossed antique-gold rules, carved band, corner mandalas
+   ========================================================================== */
+.frame-outer,
+.frame-mid { position: absolute; pointer-events: none; }
+
+.frame-outer {
+  inset: var(--frame-outer);
+  border: 0.5mm solid var(--antique-gold);
+  /* emboss: light catches the top-left, shadow falls bottom-right */
+  /* zero-blur offsets only -- see .band for why soft masks are avoided */
+  box-shadow:
+    inset 0 0 0 0.12mm #fffcf0,
+    0 0 0 0.12mm #fffcf0;
+}
+
+.frame-mid {
+  inset: var(--frame-mid);
+  border: 0.16mm solid var(--brass-gold);
+}
+
+/* carved wooden band running just inside the outer rule */
+/* carved wooden lintels top and bottom, ringaal weave down the sides --
+   the four bands sit in the channel between the outer rule and the hairline,
+   stopping short of the corners so the mandalas read cleanly. */
+.band {
+  position: absolute;
+  overflow: hidden;
+  /* Colour is baked into the pattern definitions (see make_ornaments.py):
+     `currentColor` does not reach across into a <pattern>. */
+  pointer-events: none;
+}
+.band svg { display: block; width: 100%; height: 100%; }
+/* the woven side bands read as texture only -- the carved lintels carry the
+   architectural accent, so the verticals are held well back */
+
+.band.top,
+.band.bottom { left: 40mm; right: 40mm; height: var(--band); }
+.band.top { top: var(--band-inset); }
+.band.bottom { bottom: var(--band-inset); transform: scaleY(-1); }
+.band.left,
+.band.right { top: 40mm; bottom: 40mm; width: var(--band); }
+.band.left { left: var(--band-inset); }
+.band.right { right: var(--band-inset); }
+
+.corner {
+  position: absolute;
+  width: var(--corner-size);
+  height: var(--corner-size);
+  color: var(--antique-gold);
+  pointer-events: none;
+}
+.corner svg { display: block; width: 100%; height: 100%; }
+.corner.tl { left: var(--corner-inset); top: var(--corner-inset); }
+.corner.tr { right: var(--corner-inset); top: var(--corner-inset); transform: scaleX(-1); }
+.corner.bl { left: var(--corner-inset); bottom: var(--corner-inset); transform: scaleY(-1); }
+.corner.br { right: var(--corner-inset); bottom: var(--corner-inset); transform: scale(-1, -1); }
+
+/* ==========================================================================
+   STAGE + COLUMNS
+   ========================================================================== */
+.stage {
+  position: absolute;
+  left: var(--stage-x);
+  right: var(--stage-x);
+  top: var(--stage-top);
+  bottom: var(--stage-bottom);
+  display: flex;
+  flex-direction: column;
+}
+
+.middle {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  gap: var(--panel-gap);
+  margin-top: 2mm;
+}
+
+.letter {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   PRINT-EFFECT UTILITIES
+   ========================================================================== */
+
+/* Display ink.
+   These used to be gradients clipped to the glyph outlines with
+   `background-clip: text`.  Chromium exports that as a soft-mask (SMask)
+   luminosity group, and any viewer with incomplete SMask support paints the
+   gradient *unmasked* -- the title came out as a solid maroon rectangle and the
+   year as a solid gold bar.  It happened to render correctly in Ghostscript and
+   Poppler, which is exactly why it was easy to miss.
+   Solid ink is robust in every renderer, and on press a flat rich crimson and a
+   flat antique gold are truer than a gradient anyway. */
+.foil {
+  color: var(--gold-bright);
+}
+
+.press-red {
+  color: var(--deep-crimson);
+}
+
+.hair { border: 0; height: 0.16mm; background: var(--brass-gold); opacity: 0.85; }
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.masthead { flex: 0 0 auto; text-align: center; }
+
+.host-line {
+  font-family: var(--caps);
+  font-size: 7.6pt;
+  letter-spacing: 0.34em;
+  color: var(--dark-brown);
+  opacity: 0.85;
+  margin-bottom: 3mm;
+}
+
+/* ------------------------------------------------------------------------
+   Institutional lockups, set to match the poster exactly: the university
+   wordmark at top left, the EMERGE programme mark at top right.  No emblem is
+   drawn here -- if official logo artwork is dropped into assets/logos/, the
+   template swaps these type lockups for the real images automatically.
+   ------------------------------------------------------------------------ */
+.lockup-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10mm;
+  /* clears the corner mandala (which reaches 35.4mm in from the trim) and lands
+     flush with the ends of the carved lintel band */
+  padding: 0 15mm 3.4mm;
+  border-bottom: 0.16mm solid rgba(169, 129, 44, 0.55);
+}
+.lockup { display: flex; flex-direction: column; }
+.lockup.left { align-items: flex-start; text-align: left; }
+.lockup.right { align-items: flex-end; text-align: right; }
+.lockup img { display: block; height: 19mm; width: auto; }
+
+/* Graphic Era (deemed to be University), Dehradun */
+.gew-1 {
+  font-family: var(--lockup-serif);
+  font-weight: 700;
+  font-size: 21pt;
+  line-height: 1.0;
+  color: var(--crimson);
+  letter-spacing: -0.005em;
+}
+.gew-2 {
+  font-family: var(--lockup-serif);
+  font-size: 12.4pt;
+  line-height: 1.15;
+  color: var(--near-black);
+  margin-top: 0.8mm;
+}
+.gew-2 .thin { font-weight: 300; }
+.gew-2 .bold { font-weight: 700; }
+.gew-3 {
+  font-family: var(--lockup-serif);
+  font-weight: 700;
+  font-size: 8.2pt;
+  letter-spacing: 0.42em;
+  color: var(--crimson);
+  margin-top: 0.9mm;
+}
+
+/* EMERGE - Discover. Connect. Excel. - INDUCTION PROGRAM 2026 */
+.emg-1 {
+  font-family: var(--lockup-sans);
+  font-weight: 700;
+  font-size: 21pt;
+  line-height: 1.0;
+  letter-spacing: 0.02em;
+  color: var(--emerge-blue);
+}
+.emg-rule {
+  width: 100%;
+  height: 0.2mm;
+  background: var(--emerge-blue);
+  opacity: 0.85;
+  margin: 1.1mm 0 0.9mm;
+}
+.emg-2 {
+  font-family: var(--lockup-sans);
+  font-weight: 600;
+  font-size: 6.6pt;
+  letter-spacing: 0.13em;
+  color: var(--crimson);
+}
+.emg-3 {
+  font-family: var(--lockup-sans);
+  font-weight: 600;
+  font-size: 11.6pt;
+  letter-spacing: 0.015em;
+  color: var(--near-black);
+  margin-top: 1.4mm;
+}
+
+/* EMERGE programme cartouche */
+.programme {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.5mm;
+  margin-top: 3.4mm;
+}
+.programme .seg { height: 0.16mm; width: 34mm; background: var(--brass-gold); }
+.programme .txt {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 8pt;
+  letter-spacing: 0.24em;
+  color: var(--gold-deep);
+}
+.programme-tag { margin-top: 1.2mm; }
+.programme .tag,
+.programme-tag .tag {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 8.6pt;
+  letter-spacing: 0.14em;
+  color: var(--dark-brown);
+}
+
+/* title block */
+.title-deva {
+  font-family: var(--deva);
+  font-size: 13pt;
+  letter-spacing: 0.2em;
+  color: var(--copper);
+  margin-top: 2.6mm;
+  line-height: 1.1;
+}
+.title-main {
+  font-family: var(--script);
+  font-size: 78pt;
+  line-height: 1.0;
+  margin: 0 0 0;
+  letter-spacing: 0.005em;
+}
+.title-main .face { display: block; }
+.title-year {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4.5mm;
+  margin-top: 0.5mm;
+}
+.title-year .yr {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 19pt;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+}
+.title-year .wing { height: 0.16mm; width: 26mm; background: var(--brass-gold); }
+
+.theme-line {
+  font-family: var(--caps);
+  font-size: 11.6pt;
+  letter-spacing: 0.2em;
+  color: var(--deep-crimson);
+  margin-top: 2.6mm;
+}
+
+.divider { margin: 1.8mm auto 0; width: 118mm; height: 8mm; color: var(--antique-gold); }
+.divider svg { display: block; width: 100%; height: 100%; }
+
+/* ==========================================================================
+   SIDE PANEL
+   ========================================================================== */
+.panel {
+  flex: 0 0 var(--panel-w);
+  width: var(--panel-w);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4mm 0;
+  border-left: 0.16mm solid var(--brass-gold);
+  border-right: 0.16mm solid var(--brass-gold);
+  background: #efe3c8;
+}
+.panel::before,
+.panel::after {
+  content: '';
+  position: absolute;
+  left: 1.4mm; right: 1.4mm;
+  height: 0.16mm;
+  background: #d9bc7b;
+}
+.panel::before { top: 2mm; }
+.panel::after { bottom: 2mm; }
+
+/* ringaal weave watermark down the panel */
+.panel-weave {
+  position: absolute;
+  inset: 3mm 1.4mm;
+}
+.panel-weave svg { display: block; width: 100%; height: 100%; }
+
+.panel-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 9.6pt;
+  letter-spacing: 0.34em;
+  color: var(--royal-maroon);
+  margin: 2mm 0 4mm;
+  white-space: nowrap;
+}
+
+.panel-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5mm;
+  color: var(--antique-gold);
+}
+.panel-icons .ico {
+  width: 23mm;
+  height: 13.5mm;
+  display: block;
+}
+.panel-icons .bead {
+  width: 1.5mm; height: 1.5mm;
+  border-radius: 50%;
+  background: var(--brass-gold);
+  opacity: 0.8;
+}
+
+.panel-rosette {
+  margin-top: auto;
+  margin-bottom: 3mm;
+  width: 14mm;
+  height: 14mm;
+  color: var(--antique-gold);
+  opacity: 0.8;
+}
+.panel-rosette svg { display: block; width: 100%; height: 100%; }
+
+/* ==========================================================================
+   LETTER BODY
+   ========================================================================== */
+/* ------------------------------------------------------------------------
+   Addressee.  Deliberately spare: no "To", no reference number, no dispatch
+   date and no name rule to fill in -- those read as an office memo rather than
+   an invitation.  The designation alone distinguishes the three letters.
+   ------------------------------------------------------------------------ */
+.addressee {
+  flex: 0 0 auto;
+  text-align: center;
+  margin-top: 1mm;
+  padding-bottom: 4mm;
+  border-bottom: 0.16mm solid rgba(169, 129, 44, 0.45);
+}
+.addressee .desig {
+  display: block;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 17pt;
+  letter-spacing: 0.12em;
+  color: var(--royal-maroon);
+}
+.addressee .org {
+  display: block;
+  margin-top: 1.4mm;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 12.4pt;
+  color: var(--dark-brown);
+  opacity: 0.92;
+}
+
+/* the former "Subject" line, now a standfirst rather than a form field */
+.standfirst {
+  flex: 0 0 auto;
+  margin-top: 4.6mm;
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14pt;
+  line-height: 1.4;
+  color: var(--deep-crimson);
+}
+.standfirst em { font-style: normal; font-weight: 600; }
+
+.salutation {
+  margin-top: 0;
+  font-size: 14pt;
+  font-style: italic;
+  color: var(--dark-brown);
+}
+
+/* the measure runs the full column so the justified right edge lines up with
+   the reference, subject and information rules */
+.body-copy { margin-top: 1.6mm; }
+.body-copy p {
+  margin: 0;
+  font-size: 14.6pt;
+  line-height: 1.74;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: none;
+  text-indent: 8mm;
+}
+.body-copy p + p { margin-top: 2.8mm; }
+.body-copy.lead p:first-child { text-indent: 0; }
+
+/* illuminated drop cap -- opening paragraph only */
+.body-copy.lead p:first-child::first-letter {
+  float: left;
+  font-family: var(--display-deco);
+  font-weight: 700;
+  font-size: 35pt;
+  line-height: 0.86;
+  padding: 1.2mm 1.2mm 0 0;
+  color: var(--crimson);
+  text-shadow: 0 0.18mm 0 rgba(255, 250, 238, 0.9);
+}
+
+/* pull quote carrying the festival theme */
+.pull {
+  margin: 2.6mm auto;
+  max-width: 170mm;
+  text-align: center;
+  position: relative;
+  padding: 2.6mm 12mm 2.2mm;
+}
+.pull::before,
+.pull::after {
+  content: '';
+  position: absolute;
+  left: 34mm; right: 34mm;
+  height: 0.16mm;
+  background: var(--brass-gold);
+}
+.pull::before { top: 0; }
+.pull::after { bottom: 0; }
+.pull q { quotes: none; }
+.pull .quote {
+  font-family: var(--calligraphy);
+  font-size: 25pt;
+  line-height: 1.2;
+  color: var(--deep-crimson);
+  display: block;
+}
+.pull .mark {
+  font-family: var(--display-deco);
+  font-size: 17pt;
+  color: var(--antique-gold);
+  vertical-align: -0.1em;
+  padding: 0 1.4mm;
+}
+.pull .attrib {
+  display: block;
+  margin-top: 1.2mm;
+  font-family: var(--caps);
+  font-size: 7.4pt;
+  letter-spacing: 0.24em;
+  color: var(--dark-brown);
+  opacity: 0.85;
+}
+
+/* Letters differ in length, so the leftover measure is split evenly above and
+   below a closing ornament -- the space becomes a deliberate pause and the
+   three invitations stay visually consistent. */
+.closing-mark {
+  flex: 0 0 auto;
+  height: 14mm;
+  margin-top: auto;      /* the ornament centres in the leftover measure */
+  margin-bottom: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c1a262;
+}
+.closing-mark svg { width: 52mm; height: 100%; display: block; }
+
+.signoff {
+  flex: 0 0 auto;
+  margin-top: 5mm;
+}
+.valediction { font-size: 14pt; text-align: center; }
+.valediction .close { font-style: italic; }
+
+/* ==========================================================================
+   EVENT INFORMATION BOX
+   ========================================================================== */
+.infobox {
+  flex: 0 0 auto;
+  margin-top: 7mm;
+  position: relative;
+  border: 0.42mm solid var(--antique-gold);
+  padding: 0;
+  background: #fdf6e3;
+  box-shadow: inset 0 0 0 0.14mm #fffdf3;
+}
+.infobox::before {
+  content: '';
+  position: absolute;
+  inset: 0.8mm;
+  border: 0.16mm solid rgba(201, 162, 75, 0.75);
+  pointer-events: none;
+}
+/* Heading set straight on the paper -- the filled maroon bar that used to sit
+   here read as a stuck-on rectangle. */
+.infobox .cap {
+  text-align: center;
+  color: var(--copper);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 8.4pt;
+  letter-spacing: 0.32em;
+  text-indent: 0.32em;
+  padding: 3.4mm 0 0;
+}
+.infobox .cap-rule {
+  width: 34mm;
+  height: 0.16mm;
+  background: var(--brass-gold);
+  margin: 1.8mm auto 0;
+}
+.infobox .grid {
+  display: grid;
+  grid-template-columns: 1fr 0.16mm 1fr;
+  column-gap: 10mm;
+  padding: 3.2mm 9mm 3.6mm;
+}
+.infobox .vrule { background: rgba(201, 162, 75, 0.6); }
+.infobox .col { display: flex; flex-direction: column; gap: 1.6mm; }
+.infobox .row { display: flex; flex-direction: column; }
+.infobox .k {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 7pt;
+  letter-spacing: 0.2em;
+  color: var(--copper);
+}
+.infobox .v {
+  font-size: 10.4pt;
+  line-height: 1.26;
+  color: var(--ink);
+  margin-top: 0.3mm;
+}
+.infobox .v em { font-style: italic; color: var(--deep-crimson); }
+.infobox .wide {
+  grid-column: 1 / -1;
+  border-top: 0.16mm solid rgba(201, 162, 75, 0.6);
+  margin-top: 1.5mm;
+  padding-top: 1.4mm;
+  text-align: center;
+}
+.infobox .wide .k { margin-right: 2mm; }
+.infobox .wide .v { font-size: 10pt; display: inline; }
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.footer { flex: 0 0 auto; margin-top: 3.5mm; width: 200mm; margin-left: auto; margin-right: auto; text-align: center; }
+.footer-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.5mm;
+  color: var(--antique-gold);
+}
+.footer-rule .seg {
+  flex: 1 1 auto;
+  height: 0.16mm;
+  background: var(--brass-gold);
+}
+.footer-rule svg { width: 38mm; height: 6.4mm; display: block; }
+
+.footer-hosts {
+  margin-top: 2.8mm;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8mm;
+  text-align: left;
+}
+.footer-hosts .unit.right { text-align: right; }
+.footer-hosts img { display: block; height: 13mm; width: auto; }
+.fh-sans {
+  font-family: var(--lockup-sans);
+  font-weight: 700;
+  font-size: 11pt;
+  line-height: 1.2;
+  color: var(--near-black);
+}
+.fh-red {
+  font-family: var(--lockup-serif);
+  font-weight: 700;
+  font-size: 12.4pt;
+  line-height: 1.1;
+  color: var(--crimson);
+}
+.fh-sub {
+  font-family: var(--lockup-sans);
+  font-weight: 500;
+  font-size: 7.6pt;
+  line-height: 1.3;
+  color: var(--near-black);
+  margin-top: 0.6mm;
+}
+.footer-addr {
+  margin-top: 1.3mm;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 8.6pt;
+  letter-spacing: 0.05em;
+  color: var(--dark-brown);
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   SEAL TYPOGRAPHY (inside the SVG symbols)
+   ========================================================================== */
+.seal-t {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   SCREEN-ONLY: bleed guides.  Never printed -- the .guides node is dropped
+   from the print-ready build entirely.
+   ========================================================================== */
+.guides { position: absolute; inset: 0; pointer-events: none; }
+.guides .trimline {
+  position: absolute;
+  left: var(--bleed); top: var(--bleed);
+  width: var(--trim-w); height: var(--trim-h);
+  outline: 0.2mm dashed rgba(0, 120, 255, 0.5);
+}
