@@ -1,0 +1,35 @@
+REQUIRED NUMBER OF RESPONDENTS
+
+Approach,Basis,Requirement,Status
+A. A-priori power,F-test for R2 deviation from zero; 11 predictors on CVCI; f2=0.05; power .90; alpha=.05,434,satisfied at n>=434
+B. Inverse square root,Kock and Hadaya (2018); smallest expected path beta=0.11; power .80,511,BINDING CONSTRAINT
+C. Model complexity,~96 free parameters at 5:1 for the covariance-based robustness check,480,satisfied at n>=480
+D. Multi-group analysis,Two groups each estimable at beta 0.15-0.20,490-550,satisfied at n>=490
+ADOPTED DESIGN TARGET,,520,
+Minimum acceptable,Approach A at power .80 (computed: 346),350,
+Recommended,,450,
+
+WHAT A GIVEN ACHIEVED n BUYS YOU
+Achieved n,Smallest detectable path beta (power .80),Smallest detectable interaction f2 (power .80),Approach A power at f2=0.05,MGA viable?,Verdict
+200,0.176,0.0398,0.497,no,Insufficient - below stated minimum
+250,0.157,0.0318,0.62,no,Insufficient
+300,0.144,0.0265,0.723,no,Below minimum; interaction test weak
+350,0.133,0.0226,0.806,yes,MINIMUM ACCEPTABLE - state the limitation
+400,0.124,0.0198,0.868,yes,Acceptable
+450,0.117,0.0175,0.913,yes,RECOMMENDED level reached
+480,0.113,0.0165,0.933,yes,Approach C satisfied
+511,0.11,0.0155,0.949,yes,Binding Approach B satisfied
+520,0.109,0.0152,0.953,yes,DESIGN TARGET MET
+600,0.101,0.0132,0.978,yes,Comfortable
+700,0.094,0.0112,0.992,yes,Comfortable; medium interaction detectable
+
+POWER TO DETECT THE INTERACTION (the binding test)
+"Judge against interaction-specific benchmarks 0.005 / 0.010 / 0.025, NOT Cohen 0.02/0.15/0.35"
+Achieved n,f2=0.005 (small),f2=0.010 (medium),f2=0.015,f2=0.025 (large),Smallest f2 at power .80
+350,0.261,0.463,0.627,0.839,0.0226
+400,0.292,0.514,0.686,0.884,0.0198
+450,0.322,0.562,0.736,0.917,0.0175
+480,0.34,0.59,0.764,0.933,0.0165
+511,0.358,0.617,0.789,0.946,0.0155
+520,0.363,0.624,0.796,0.949,0.0152
+600,0.409,0.686,0.85,0.972,0.0132
