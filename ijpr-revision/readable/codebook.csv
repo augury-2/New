@@ -1,0 +1,70 @@
+"Codebook — 68 columns, in the exact order required by analysis_seminr.R",,,,,
+#,Column name,Label,Type,Allowed values,Notes
+1,ID,Respondent identifier,text,unique,Required. Any unique code.
+2,DATE,Date of interview,date,yyyy-mm-dd,Required.
+3,ENUM,Enumerator identifier,text,,Required — needed for the enumerator-effects robustness check.
+4,DUR_min,Interview duration in minutes,integer,>0,Required — needed for the fast-completion flag.
+5,STRATUM,Sampling stratum,integer,1–6,See 05_ValueLabels. Required for Table 9 response accounting.
+6,TIER,Network position,integer,1–4,"See 05_ValueLabels. Used as the MGA grouping variable, NOT as a covariate."
+7,SCR1,Keeps or supervises records?,integer,0/1,Screening. Must be 1 to be eligible.
+8,SCR2,Participates in pricing / disposal decisions?,integer,0/1,Screening. Must be 1 to be eligible.
+9,SCR3,Seasons in this role,integer,>=0,Screening. Must be >=3 (the outcome items are change over three seasons).
+10,SCR4,Self-described role,integer,1–6,Assigns STRATUM. See 05_ValueLabels.
+11,CAC1,Circular accounting capability item 1,integer,1–7,"Focal. Items 1–3 measurement, 4–6 loss costing, 7–9 recovery valuation. 7-point; 1 = not at all … 7 = to a very great extent"
+12,CAC2,Circular accounting capability item 2,integer,1–7,"Focal. Items 1–3 measurement, 4–6 loss costing, 7–9 recovery valuation. 7-point; 1 = not at all … 7 = to a very great extent"
+13,CAC3,Circular accounting capability item 3,integer,1–7,"Focal. Items 1–3 measurement, 4–6 loss costing, 7–9 recovery valuation. 7-point; 1 = not at all … 7 = to a very great extent"
+14,CAC4,Circular accounting capability item 4,integer,1–7,"Focal. Items 1–3 measurement, 4–6 loss costing, 7–9 recovery valuation. 7-point; 1 = not at all … 7 = to a very great extent"
+15,CAC5,Circular accounting capability item 5,integer,1–7,"Focal. Items 1–3 measurement, 4–6 loss costing, 7–9 recovery valuation. 7-point; 1 = not at all … 7 = to a very great extent"
+16,CAC6,Circular accounting capability item 6,integer,1–7,"Focal. Items 1–3 measurement, 4–6 loss costing, 7–9 recovery valuation. 7-point; 1 = not at all … 7 = to a very great extent"
+17,CAC7,Circular accounting capability item 7,integer,1–7,"Focal. Items 1–3 measurement, 4–6 loss costing, 7–9 recovery valuation. 7-point; 1 = not at all … 7 = to a very great extent"
+18,CAC8,Circular accounting capability item 8,integer,1–7,"Focal. Items 1–3 measurement, 4–6 loss costing, 7–9 recovery valuation. 7-point; 1 = not at all … 7 = to a very great extent"
+19,CAC9,Circular accounting capability item 9,integer,1–7,"Focal. Items 1–3 measurement, 4–6 loss costing, 7–9 recovery valuation. 7-point; 1 = not at all … 7 = to a very great extent"
+20,CIT1,Circular information transparency item 1,integer,1–7,Focal. 7-point; 1 = not at all … 7 = to a very great extent
+21,CIT2,Circular information transparency item 2,integer,1–7,Focal. 7-point; 1 = not at all … 7 = to a very great extent
+22,CIT3,Circular information transparency item 3,integer,1–7,Focal. 7-point; 1 = not at all … 7 = to a very great extent
+23,CIT4,Circular information transparency item 4,integer,1–7,Focal. 7-point; 1 = not at all … 7 = to a very great extent
+24,CIT5,Circular information transparency item 5,integer,1–7,Focal. 7-point; 1 = not at all … 7 = to a very great extent
+25,CGQ1,Circular governance quality item 1,integer,1–7,Focal — the moderator. 7-point; 1 = not at all … 7 = to a very great extent
+26,CGQ2,Circular governance quality item 2,integer,1–7,Focal — the moderator. 7-point; 1 = not at all … 7 = to a very great extent
+27,CGQ3,Circular governance quality item 3,integer,1–7,Focal — the moderator. 7-point; 1 = not at all … 7 = to a very great extent
+28,CGQ4,Circular governance quality item 4,integer,1–7,Focal — the moderator. 7-point; 1 = not at all … 7 = to a very great extent
+29,CGQ5,Circular governance quality item 5,integer,1–7,Focal — the moderator. 7-point; 1 = not at all … 7 = to a very great extent
+30,CGQ6,Circular governance quality item 6,integer,1–7,Focal — the moderator. 7-point; 1 = not at all … 7 = to a very great extent
+31,CVCI1,Circular value-chain integration item 1,integer,1–7,Focal — the focal endogenous construct. 7-point; 1 = not at all … 7 = to a very great extent
+32,CVCI2,Circular value-chain integration item 2,integer,1–7,Focal — the focal endogenous construct. 7-point; 1 = not at all … 7 = to a very great extent
+33,CVCI3,Circular value-chain integration item 3,integer,1–7,Focal — the focal endogenous construct. 7-point; 1 = not at all … 7 = to a very great extent
+34,CVCI4,Circular value-chain integration item 4,integer,1–7,Focal — the focal endogenous construct. 7-point; 1 = not at all … 7 = to a very great extent
+35,CVCI5,Circular value-chain integration item 5,integer,1–7,Focal — the focal endogenous construct. 7-point; 1 = not at all … 7 = to a very great extent
+36,CVCI6,Circular value-chain integration item 6,integer,1–7,Focal — the focal endogenous construct. 7-point; 1 = not at all … 7 = to a very great extent
+37,CVCP1,Circular value creation performance item 1,integer,1–7,"Focal. Items 1–4 economic, 5–8 environmental, 9–11 social. HIGHER = BETTER. 7-point change; 1 = decreased greatly, 4 = no change, 7 = increased greatly"
+38,CVCP2,Circular value creation performance item 2,integer,1–7,"Focal. Items 1–4 economic, 5–8 environmental, 9–11 social. HIGHER = BETTER. 7-point change; 1 = decreased greatly, 4 = no change, 7 = increased greatly"
+39,CVCP3,Circular value creation performance item 3,integer,1–7,"Focal. Items 1–4 economic, 5–8 environmental, 9–11 social. HIGHER = BETTER. 7-point change; 1 = decreased greatly, 4 = no change, 7 = increased greatly"
+40,CVCP4,Circular value creation performance item 4,integer,1–7,"Focal. Items 1–4 economic, 5–8 environmental, 9–11 social. HIGHER = BETTER. 7-point change; 1 = decreased greatly, 4 = no change, 7 = increased greatly"
+41,CVCP5,Circular value creation performance item 5,integer,1–7,"Focal. Items 1–4 economic, 5–8 environmental, 9–11 social. HIGHER = BETTER. 7-point change; 1 = decreased greatly, 4 = no change, 7 = increased greatly"
+42,CVCP6,Circular value creation performance item 6,integer,1–7,"Focal. Items 1–4 economic, 5–8 environmental, 9–11 social. HIGHER = BETTER. 7-point change; 1 = decreased greatly, 4 = no change, 7 = increased greatly"
+43,CVCP7,Circular value creation performance item 7,integer,1–7,"Focal. Items 1–4 economic, 5–8 environmental, 9–11 social. HIGHER = BETTER. 7-point change; 1 = decreased greatly, 4 = no change, 7 = increased greatly"
+44,CVCP8,Circular value creation performance item 8,integer,1–7,"Focal. Items 1–4 economic, 5–8 environmental, 9–11 social. HIGHER = BETTER. 7-point change; 1 = decreased greatly, 4 = no change, 7 = increased greatly"
+45,CVCP9,Circular value creation performance item 9,integer,1–7,"Focal. Items 1–4 economic, 5–8 environmental, 9–11 social. HIGHER = BETTER. 7-point change; 1 = decreased greatly, 4 = no change, 7 = increased greatly"
+46,CVCP10,Circular value creation performance item 10,integer,1–7,"Focal. Items 1–4 economic, 5–8 environmental, 9–11 social. HIGHER = BETTER. 7-point change; 1 = decreased greatly, 4 = no change, 7 = increased greatly"
+47,CVCP11,Circular value creation performance item 11,integer,1–7,"Focal. Items 1–4 economic, 5–8 environmental, 9–11 social. HIGHER = BETTER. 7-point change; 1 = decreased greatly, 4 = no change, 7 = increased greatly"
+48,DTC1,Digital traceability capability item 1,integer,1–7,Control and rival explanation. Critical to the smart-production test. 7-point; 1 = not at all … 7 = to a very great extent
+49,DTC2,Digital traceability capability item 2,integer,1–7,Control and rival explanation. Critical to the smart-production test. 7-point; 1 = not at all … 7 = to a very great extent
+50,DTC3,Digital traceability capability item 3,integer,1–7,Control and rival explanation. Critical to the smart-production test. 7-point; 1 = not at all … 7 = to a very great extent
+51,IS1,Institutional support item 1,integer,1–7,Control. IS2 and IS3 are the double-barrelled items flagged in Section 5.5. 7-point; 1 = not at all … 7 = to a very great extent
+52,IS2,Institutional support item 2,integer,1–7,Control. IS2 and IS3 are the double-barrelled items flagged in Section 5.5. 7-point; 1 = not at all … 7 = to a very great extent
+53,IS3,Institutional support item 3,integer,1–7,Control. IS2 and IS3 are the double-barrelled items flagged in Section 5.5. 7-point; 1 = not at all … 7 = to a very great extent
+54,MK1,Marker (attitude toward the colour blue) item 1,integer,1–7,"Method-bias marker. Miller and Simmering (2023), verbatim. Excluded from the structural model. 7-point; 1 = not at all … 7 = to a very great extent"
+55,MK2,Marker (attitude toward the colour blue) item 2,integer,1–7,"Method-bias marker. Miller and Simmering (2023), verbatim. Excluded from the structural model. 7-point; 1 = not at all … 7 = to a very great extent"
+56,MK3,Marker (attitude toward the colour blue) item 3,integer,1–7,"Method-bias marker. Miller and Simmering (2023), verbatim. Excluded from the structural model. 7-point; 1 = not at all … 7 = to a very great extent"
+57,CAC_GLOBAL,Global single-item measure of circular accounting capability,integer,1–7,REQUIRED FOR REDUNDANCY ANALYSIS of the formative HOC. Cannot be added later. Leave blank if not fielded and declare the limitation.
+58,CVCP_GLOBAL,Global single-item measure of circular value creation,integer,1–7,REQUIRED FOR REDUNDANCY ANALYSIS of the formative HOC. Cannot be added later.
+59,SIZE_n,"Persons engaged, incl. unpaid family labour",integer,>=1,Control. Script derives SIZE_ln = log(1+n).
+60,AGE_yr,Years the enterprise has operated,integer,>=0,Control. Script derives AGE_ln.
+61,VOL_t,Tonnes handled last season,decimal,>=0,Control. Script derives VOL_ln.
+62,EDU,Key informant education,integer,1–6,Control. See 05_ValueLabels.
+63,AFF,Producer-organisation / cooperative member,integer,0/1,Control and MGA grouping variable.
+64,OBJ1,Loss ratio from records: rejected or lost ÷ taken in,decimal,0–1,Objective subsample only; blank otherwise.
+65,OBJ2_qty,By-product quantity sold last season (tonnes),decimal,>=0,Objective subsample only.
+66,OBJ2_val,By-product value realised last season (currency),decimal,>=0,Objective subsample only.
+67,OBJ3,Realised price ÷ district modal price,decimal,>0,Objective subsample only.
+68,NOTES,Enumerator notes,text,,Optional. Not analysed.

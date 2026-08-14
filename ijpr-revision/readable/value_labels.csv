@@ -1,0 +1,26 @@
+Categorical coding,,,
+Variable,Code,Label,Note
+STRATUM,1,"Producers, non-affiliated",Target 180 (34.6%). MGA group: upstream.
+STRATUM,2,"Producers, producer-organisation members",Target 120 (23.1%). MGA group: upstream with collective governance.
+STRATUM,3,"Aggregators, traders, commission agents",Target 80 (15.4%). The information-asymmetry tier.
+STRATUM,4,Processors and common facility centres,Target 70 (13.5%). Manufacturing and recovery actors; deliberately over-sampled.
+STRATUM,5,Retailers and institutional buyers,Target 40 (7.7%). Downstream price-formation tier.
+STRATUM,6,Network support institutions,Target 30 (5.8%). EXCLUDED from group analysis.
+TIER,1,Upstream producer,Strata 1–2
+TIER,2,Midstream intermediary,Stratum 3
+TIER,3,Processing / recovery,Stratum 4
+TIER,4,Downstream buyer,Stratum 5
+TIER,(blank),Support institutions,Stratum 6 — leave TIER blank; excluded from MGA.
+EDU,1,No formal schooling,
+EDU,2,Primary,
+EDU,3,Secondary,
+EDU,4,Higher secondary,
+EDU,5,Graduate,
+EDU,6,Postgraduate,
+AFF,0,Not a member of a producer organisation or cooperative,
+AFF,1,Member of a producer organisation or cooperative,MGA grouping variable.
+SCR1,0,No — not eligible,Exclude the case.
+SCR1,1,Yes — keeps or supervises records,
+SCR2,0,No — not eligible,Exclude the case.
+SCR2,1,Yes — participates in pricing / disposal decisions,
+SCR4,1–6,Same coding as STRATUM,Self-described role; used to assign STRATUM.

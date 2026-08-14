@@ -1,0 +1,50 @@
+The 46-item instrument,,,,,,
+"RECONSTRUCTION — the instrument table is not present in JCLP_11_08_26.docx. These wordings satisfy every constraint the manuscript states (counts, dimensions, the 22/11/10/3 source split, and the item labels named in Section 5.5), but they are NOT retrieved from your file. Replace column F with your fielded wordings and keep the IDs aligned.",,,,,,
+ID,Construct,Dimension,Source,R3 reworded?,Item wording,Watch for
+CAC1,CAC,Material and resource-flow measurement,AS,,We keep a written or electronic record of the quantity of raw material we take in each season.,
+CAC2,CAC,Material and resource-flow measurement,AS,yes,"We write down how much of what we handle is rejected, downgraded or lost.",The one item quoted in your manuscript.
+CAC3,CAC,Material and resource-flow measurement,AS,,We record what happens to the material that does not become saleable product — where it goes and who takes it.,
+CAC4,CAC,Loss and waste costing,AS,,We work out what the material we lose or reject cost us to buy or to produce.,
+CAC5,CAC,Loss and waste costing,AS,,We know what the rejected or lost material would have earned had it been sold as product.,
+CAC6,CAC,Loss and waste costing,ND,,We keep the cost of losses separate from our general operating costs rather than absorbing it into overall cost.,
+CAC7,CAC,Recovery and circular investment evaluation,ND,,"Before deciding whether to recover a by-product or residue, we estimate what it could earn.",New dimension; expert disagreement concentrated here.
+CAC8,CAC,Recovery and circular investment evaluation,ND,,We compare the cost of recovering a residue against the cost of disposing of it.,New dimension.
+CAC9,CAC,Recovery and circular investment evaluation,ND,,"When we consider equipment or capacity for processing residues, we work out whether the investment would pay back.",New dimension.
+CIT1,CIT,—,AV,,Partners we deal with can see how much material is rejected or lost at our stage.,
+CIT2,CIT,—,AV,,We can see how much material is rejected or lost at the stages before and after us.,
+CIT3,CIT,—,AV,yes,"Information about recoverable residues and by-products reaches the people who could use them, in time for them to act.",Reached 0.975 after rewording.
+CIT4,CIT,—,AS,,Information about material flows and losses in this chain is accurate and reliable enough to base a decision on.,
+CIT5,CIT,—,ND,,We can see how the money paid for the final product is divided among the actors in this chain.,Price rather than material information — most likely to behave differently.
+CGQ1,CGQ,Responsibility allocation,ND,yes,It is clear which party is answerable when material is lost or spoiled between us and our partners.,The construct's diagnostic core.
+CGQ2,CGQ,Joint monitoring and verification,AV,,Our partners and we jointly check the quantities and quality recorded when material changes hands.,
+CGQ3,CGQ,Codified standards,AS,,What counts as an acceptable level of loss is agreed and recorded with our partners.,
+CGQ4,CGQ,Participatory decision-making,AV,,We are able to take part in decisions that affect how material and losses are handled in this chain.,
+CGQ5,CGQ,Participatory decision-making,AV,,Our views are taken into account when the terms of trade in this chain are set.,
+CGQ6,CGQ,Enforceable commitment,AV,yes,"Commitments our partners make about handling, collection or payment are honoured, and there are consequences if they are not.",Low ρA here attenuates the interaction directly.
+CVCI1,CVCI,—,AV,,We plan jointly with partners how material that would otherwise be wasted will be collected and moved.,
+CVCI2,CVCI,—,AV,yes,We coordinate the timing of our operations with partners so that recoverable material is handled before it deteriorates.,
+CVCI3,CVCI,—,AV,,"We share equipment, storage or transport with partners for handling residues and by-products.",
+CVCI4,CVCI,—,AV,,We and our partners exchange the information needed to route recoverable material to where it can be used.,Watch for HTMT overlap with CIT.
+CVCI5,CVCI,—,AS,,We agree with partners in advance how the proceeds from recovered material will be shared.,
+CVCI6,CVCI,—,AV,,We work together with partners to find new uses for material that used to be discarded.,
+CVCP1,CVCP,Economic,AV,,Income earned from selling by-products or residues that were previously discarded.,
+CVCP2,CVCP,Economic,AV,,Savings from reusing material internally instead of buying new.,
+CVCP3,CVCP,Economic,AS,,The price we realise for our main product.,
+CVCP4,CVCP,Economic,AS,,Reduction in the cost of disposing of waste.,
+CVCP5,CVCP,Environmental,AV,,Reduction in the quantity of material leaving our operation as waste.,
+CVCP6,CVCP,Environmental,AV,,Reduction in the share of what we handle that is lost or spoiled.,
+CVCP7,CVCP,Environmental,AS,,Reduction in the energy and water used per unit of product.,
+CVCP8,CVCP,Environmental,ND,,"Reduction in the quantity of residues sent to landfill, burned or dumped.",
+CVCP9,CVCP,Social,ND,,The share of the value from recovered material that reaches the producers who supplied it.,"Weak SOC weight is a FINDING, not a failure."
+CVCP10,CVCP,Social,ND,,Employment or paid work created by handling and processing recovered material.,
+CVCP11,CVCP,Social,ND,,Fairness with which the gains from reducing losses are shared among the actors in this chain.,
+DTC1,DTC (control),—,AV,,"We use digital tools — mobile apps, spreadsheets or software — to record the quantities we handle.","If β(CAC→CIT) collapses when DTC enters, the paper's premise fails."
+DTC2,DTC (control),—,AV,,Material we handle can be traced back to its source using our records or codes.,
+DTC3,DTC (control),—,AV,,We can exchange records of quantities and quality with our partners electronically.,
+IS1,IS (control),—,AV,yes,Government or industry bodies provide us with useful guidance on reducing losses and using residues.,
+IS2,IS (control),—,AV,no,Training and technical advice on handling and processing residues are available to us.,"DOUBLE-BARRELLED, below threshold, never revised."
+IS3,IS (control),—,AV,no,Financial support or subsidy is available for equipment that would let us process residues.,"DOUBLE-BARRELLED, below threshold, never revised."
+MK1,MK (marker),—,MK,no,[Reproduce verbatim from Miller and Simmering 2023 — do not paraphrase],Low relevance is the QUALIFYING property of a marker.
+MK2,MK (marker),—,MK,,[Reproduce verbatim from Miller and Simmering 2023],
+MK3,MK (marker),—,MK,yes,[Reproduce verbatim from Miller and Simmering 2023],
+"Source: AV = adapted from a validated scale (22). AS = validated item structure adapted to circular resource-flow content (11). ND = newly developed (10). MK = validated marker administered verbatim (3). Total 46, reproducing the split in Section 5.5.",,,,,,
